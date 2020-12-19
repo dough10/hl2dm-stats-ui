@@ -4,8 +4,14 @@
   "description": "Frontend for hl2dm-stats nodejs project",
   "main": "build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "esperanto": "^0.7.6",
+    "html-minifier": "^4.0.0",
+    "uglify-es": "^3.3.9",
+    "uglifycss": "0.0.29"
+  }
 }
