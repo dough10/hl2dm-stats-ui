@@ -12,6 +12,7 @@
     "esperanto": "^0.7.6",
     "html-minifier": "^4.0.0",
     "uglify-es": "^3.3.9",
-    "uglifycss": "0.0.29"
+    "uglifycss": "0.0.29",
+    "version-incrementer": "^0.1.1"
   }
 }
