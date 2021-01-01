@@ -1,5 +1,3 @@
-export {Timer};
-
 /**
  * A class for timing duration of things
  */
@@ -25,3 +23,5 @@ class Timer {
     return `${arr[0]} hours ${arr[1]} minutes ${arr[2]} seconds`;
   }
 }
+
+export {Timer};

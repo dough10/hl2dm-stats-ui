@@ -25,7 +25,7 @@ function applyRipples() {
     qsa('.icon-button').forEach(ripples.attachRoundButtonRipple);
     qsa('.link').forEach(ripples.attachButtonRipple);
     ripples.attachButtonRipple(qs('#reset'));
-    resolve()
+    resolve();
   });
 }
 
@@ -152,7 +152,7 @@ function createSVG(d, count, title, suicides) {
   svg.appendChild(path);
   wrapper.appendChild(svg);
   const text = document.createElement('div');
-  text.style = "font-size: 12px;"
+  text.style = "font-size: 12px;";
   text.textContent = count;
   wrapper.appendChild(text);
   return wrapper;
@@ -187,45 +187,34 @@ function emptyServer() {
  */
 function monthName(month) {
   if (typeof month !== 'number') {
-    month = Number(month)
+    month = Number(month);
   }
   switch (month) {
     case 0:
       return 'January';
-      break;
+
     case 1:
       return 'Febuary';
-      break;
     case 2:
       return 'March';
-      break;
     case 3:
       return 'April';
-      break;
     case 4:
       return 'May';
-      break;
     case 5:
       return 'June';
-      break;
     case 6:
       return 'July';
-      break;
     case 7:
       return 'August';
-      break;
     case 8:
       return 'September';
-      break;
     case 9:
       return 'October';
-      break;
     case 10:
       return 'November';
-      break;
     case 11:
       return 'December';
-      break;
 
   }
 }
@@ -240,52 +229,36 @@ function getWeaponIcon(weapon) {
   switch (weapon) {
     case "grenade_frag":
       return ['4', 'HL2Weapons'];
-      break;
     case "357":
       return ['.', 'HL2Weapons'];
-      break;
     case "shotgun":
       return ['0', 'HL2Weapons'];
-      break;
     case "pistol":
       return ['-', 'HL2Weapons'];
-      break;
     case "smg1":
       return ['/', 'HL2Weapons'];
-      break;
     case "smg1_grenade":
       return ['7', 'HL2Weapons'];
-      break;
     case "crowbar":
       return ['6', 'HL2Weapons'];
-      break;
     case "crossbow_bolt":
       return ['1', 'HL2Weapons'];
-      break;
     case "combine_ball":
       return ['8', 'HL2Weapons'];
-      break;
     case "ar2":
       return ['2', 'HL2Weapons'];
-      break;
     case "rpg_missile":
       return ['3', 'HL2Weapons'];
-      break;
     case "physbox":
       return ['9', 'HL2Weapons'];
-      break;
     case "stunstick":
       return ['!', 'HL2Weapons'];
-      break;
     case "physics":
       return ['9', 'HL2Weapons'];
-      break;
     case "headshots":
       return ['D', 'CS'];
-      break;
     case "physcannon":
       return [',', 'HL2Weapons'];
-      break;
   }
 }
 
@@ -476,8 +449,8 @@ function displayPlayerOnline(playersOnline) {
   resetTime.setMinutes(0);
   resetTime.setSeconds(0);
   resetTime.setMonth(resetTime.getMonth() + 1, 1);
-  console.log('resetday', loadtime.getDate() === lastDay.getDate(), 'before', loadtime.getDate() > lastDay.getDate() - 3, 'after', loadtime.getDate() <= 2)
-  if (loadtime.getDate() === lastDay.getDate()) {
+  console.log('lastday', loadtime.getDate() === lastDay.getDate() || loadtime.getTime() <= resetTime.getTime(), 'before', loadtime.getDate() > lastDay.getDate() - 3, 'after', loadtime.getDate() <= 2);
+  if (loadtime.getDate() === lastDay.getDate() || loadtime.getTime() <= resetTime.getTime()) {
     var doTime = _ => {
       var now = new Date().getTime();
       var distance = resetTime.getTime() - now;
@@ -568,11 +541,11 @@ function parseTopData(top, page, cb) {
     name.style.transition = `color 200ms ease-in 0ms`;
     name.style.height = '24px';
     const weaponWrapper1 = createWrapper();
-    weaponWrapper1.style.marginTop = '24px'
+    weaponWrapper1.style.marginTop = '24px';
     weaponWrapper1.style.display = 'none';
     weaponWrapper1.style.opacity = 0;
     const weaponWrapper2 = createWrapper();
-    weaponWrapper2.style.marginTop = '24px'
+    weaponWrapper2.style.marginTop = '24px';
     weaponWrapper2.style.display = 'none';
     weaponWrapper2.style.opacity = 0;
     ipLookup(player.ip, player.id).then(res => {
@@ -586,7 +559,7 @@ function parseTopData(top, page, cb) {
     const deaths = createSVG(deathsIcon, player.deaths, "Deaths", player.suicide);
     const kdr = createSVG(kdrIcon, player.kdr, "KDR");
     wrapper.appendChild(name);
-    const fav = favWeapon(player.weapons)
+    const fav = favWeapon(player.weapons);
     const favWrapper = createWrapper();
     favWrapper.classList.add('tooltip');
     if (window.innerWidth <= 500) {
@@ -633,7 +606,7 @@ function parseTopData(top, page, cb) {
     ));
     text.style.marginRight = '8px';
     icon.style.marginRight = '4px';
-    var wIcon = getWeaponIcon(fav[0])
+    var wIcon = getWeaponIcon(fav[0]);
     icon.classList.add(wIcon[1]);
     icon.textContent = wIcon[0];
     text.textContent = fav[1];
@@ -715,7 +688,7 @@ function parseTopData(top, page, cb) {
  * @param {Array} demos - list of demos from this month
  */
 function parseDemos(demos) {
-  var timer = new Timer('parse demos')
+  var timer = new Timer('parse demos');
   demos.forEach((demo, idx, array) => {
     const a = document.createElement('a');
     a.href = `https://hl2dm.dough10.me/api/download/${demo[0]}`;
@@ -734,7 +707,7 @@ function parseDemos(demos) {
     wrapper.appendChild(size);
     wrapper.appendChild(time);
     card.appendChild(wrapper);
-    card.classList.add('stat')
+    card.classList.add('stat');
     a.appendChild(card);
     qs('#page3').appendChild(a);
     ripples.attachButtonRipple(card);
@@ -847,7 +820,7 @@ function isLocalIP(ip) {
 function ipLookup(ip, id) {
   return new Promise((resolve, reject) => {
     if ('localStorage' in window && localStorage[id]) {
-      var savedData = JSON.parse(localStorage[id])
+      var savedData = JSON.parse(localStorage[id]);
       if (ip !== savedData.ip) {
         if (!validIPaddress(ip)) {
           console.error(`error updating IP. IP address invalid ${ip}`);
@@ -1238,7 +1211,7 @@ qs('#demos').onClick(demosPage);
 qs('#oldStats').onClick(oldStatsPage);
 
 qs('#demoZip').onClick(_ => {
-  const a = document.createElement('a')
+  const a = document.createElement('a');
   a.href = `https://hl2dm.dough10.me/api/download/demos-zip/${qs('#months').value}.zip`;
   a.type = 'application/zip';
   a.download = true;
@@ -1248,7 +1221,7 @@ qs('#demoZip').onClick(_ => {
 });
 
 qs('#logZip').onClick(_ => {
-  const a = document.createElement('a')
+  const a = document.createElement('a');
   a.href = `https://hl2dm.dough10.me/api/download/logs-zip/${qs('#months').value}.zip`;
   a.type = 'application/zip';
   a.download = true;

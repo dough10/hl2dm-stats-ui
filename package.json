@@ -4,13 +4,15 @@
   "description": "Frontend for hl2dm-stats nodejs project",
   "main": "build.js",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "HTTP": "http-server html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "esperanto": "^0.7.6",
     "html-minifier": "^4.0.0",
+    "jshint": "^2.12.0",
     "uglify-es": "^3.3.9",
     "uglifycss": "0.0.29",
     "version-incrementer": "^0.1.1"
