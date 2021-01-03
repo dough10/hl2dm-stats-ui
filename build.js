@@ -28,7 +28,8 @@ const files = [
   'fonts/halflife2.ttf',
   'fonts/hl2mp.ttf',
   'fonts/csd.ttf',
-  '404.html'
+  '404.html',
+  '500.html'
 ];
 
 
@@ -83,7 +84,7 @@ function uglifyJavaScript(arr) {
     var file = arr[1];
     var uglyCode = uglifyJS.minify(js);
     if (uglyCode.error) {
-      reject(uglyCode.error)
+      reject(uglyCode.error);
       return;
     }
     fs.writeFile( `./html/js/${file}.js`, uglyCode.code, resolve);
