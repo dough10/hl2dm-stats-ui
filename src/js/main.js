@@ -574,15 +574,15 @@ function parseTopData(top, page, cb) {
     const text = document.createElement('div');
     tooltip.classList.add('tooltiptext');
     tooltip.style.transformOrigin = 'center';
-    var shots;
-    var hits;
-    var hs;
-    var stk;
-    var dam;
-    var adpk;
-    var adph;
-    var hss;
-    var lss;
+    var shots = 0;
+    var hits = 0;
+    var hs = 0;
+    var stk = 0;
+    var dam = 0;
+    var adpk = 0;
+    var adph = 0;
+    var hss = 0;
+    var lss = 9999;
     if (fav[2] && fav[2][0] && fav[2][1] && fav[2][2]) {
       shots = fav[2][0];
       hits = fav[2][1];
