@@ -43,7 +43,7 @@ function loadRipples() {
 /**
  * animate cards in from right side of screen
  *
- * @param {Element} container - element cards are in side of
+ * @param {Element} container element cards are in side of
  */
 function cascadeCards(container) {
   return new Promise(resolve => {
@@ -99,9 +99,9 @@ function createNoCard() {
 /**
  * returns svg element
  *
- * @param {String} d - svg string value
- * @param {Number} count - number of kills or deaths
- * @param {String} title - thing needing icon
+ * @param {String} d svg string value
+ * @param {Number} count number of kills or deaths
+ * @param {String} title thing needing icon
  */
 function createSVG(d, count, title, suicides) {
   const wrapper = createWrapper();
@@ -183,7 +183,7 @@ function emptyServer() {
 /**
  * returns month name in string form
  *
- * @param {Number} month - month number 0 - 11
+ * @param {Number} month month number 0 - 11
  */
 function monthName(month) {
   if (typeof month !== 'number') {
@@ -223,7 +223,7 @@ function monthName(month) {
  * returns the text value to represent the weapon used 
  * also the name of the class to display the correct font
  *
- * @param {String} weapon - weapon needing icon
+ * @param {String} weapon weapon needing icon
  */
 function getWeaponIcon(weapon) {
   switch (weapon) {
@@ -265,7 +265,7 @@ function getWeaponIcon(weapon) {
 /**
  * convers 0's to < 1
  *
- * @param {Number} p - %
+ * @param {Number} p %
  */
 function isLessThenOne(p) {
   if (p === 0) {
@@ -277,8 +277,8 @@ function isLessThenOne(p) {
 /**
  * creates a element and add text content
  *
- * @param {String} text - the string of text to display in the element
- * @param {String} color - color to display the text
+ * @param {String} text the string of text to display in the element
+ * @param {String} color color to display the text
  */
 function textDiv(text, color) {
   var div = document.createElement('div');
@@ -292,7 +292,7 @@ function textDiv(text, color) {
 /**
  * seperate a number with commas
  *
- * @param {Number} x - number to be seperated
+ * @param {Number} x number to be seperated
  */
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -301,11 +301,11 @@ function numberWithCommas(x) {
 /**
  * creates HTML for weapon info tooltips
  *
- * @param {String} weaponName - name of the weapon
- * @param {Number} precent - precentage of kills withs the weapon
- * @param {Number} shots - Number of shots fired
- * @param {Number} hitPrecent - precentage of shots fired that hit the target
- * @param {Number} hsPrecent - precentage of shots fired that hit in the head
+ * @param {String} weaponName name of the weapon
+ * @param {Number} precent precentage of kills withs the weapon
+ * @param {Number} shots Number of shots fired
+ * @param {Number} hitPrecent precentage of shots fired that hit the target
+ * @param {Number} hsPrecent precentage of shots fired that hit in the head
  */
 function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, shotsToKill, damage, adpk, adph, hss, lss) {
   var container = document.createElement('div');
@@ -352,9 +352,9 @@ function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, s
 /**
  * displays weapon stats
  *
- * @param {Array} wrappers - pair of elements to send output to limit 2
- * @param {Array} weapons - list of weapons
- * @param {Number} kills - total number of kills
+ * @param {Array} wrappers pair of elements to send output to limit 2
+ * @param {Array} weapons list of weapons
+ * @param {Number} kills total number of kills
  */
 function displayWeaponData(wrappers, weapons, kills) {
   if (wrappers.length > 2) {
@@ -436,7 +436,7 @@ function showApp() {
 /**
  * displays data about who is connected to the game server
  *
- * @param {Number} playersOnline - Number of players connected to the server
+ * @param {Number} playersOnline Number of players connected to the server
  */
 function displayPlayerOnline(playersOnline) {
   var el = qs('#reset');
@@ -513,7 +513,7 @@ function displayPlayerOnline(playersOnline) {
 /**
  * converts a number to a more readable form
  *
- * @param {Number} num - numberr to be made readable
+ * @param {Number} num numberr to be made readable
  */
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -522,9 +522,9 @@ function formatNumber(num) {
 /**
  * displays top player list in UI
  *
- * @param {Array} top - list containing all the player and server stats from API
- * @param {String} page - name of the element the output will be pushed to
- * @param {Function} cb - ip address of the client connected to the server
+ * @param {Array} top list containing all the player and server stats from API
+ * @param {String} page name of the element the output will be pushed to
+ * @param {Function} cb ip address of the client connected to the server
  */
 function parseTopData(top, page, cb) {
   const killsIcon = "M7,5H23V9H22V10H16A1,1 0 0,0 15,11V12A2,2 0 0,1 13,14H9.62C9.24,14 8.89,14.22 8.72,14.56L6.27,19.45C6.1,19.79 5.76,20 5.38,20H2C2,20 -1,20 3,14C3,14 6,10 2,10V5H3L3.5,4H6.5L7,5M14,12V11A1,1 0 0,0 13,10H12C12,10 11,11 12,12A2,2 0 0,1 10,10A1,1 0 0,0 9,11V12A1,1 0 0,0 10,13H13A1,1 0 0,0 14,12Z";
@@ -689,7 +689,7 @@ function parseTopData(top, page, cb) {
 /**
  * displays the list of demos from server api
  *
- * @param {Array} demos - list of demos from this month
+ * @param {Array} demos list of demos from this month
  */
 function parseDemos(demos) {
   var timer = new Timer('parse demos');
@@ -725,7 +725,7 @@ function parseDemos(demos) {
 /**
  * display statistics about a player
  *
- * @param {Object} player - player object from GameDig node js module
+ * @param {Object} player player object from GameDig node js module
  */
 function displayPlayer(player) {
   const wrapper = document.createElement('div');
@@ -774,7 +774,7 @@ function removeOfflinePlayers(players) {
 /**
  * lparse and display server statistics
  *
- * @param {Object} status - status object from GameDig node js module
+ * @param {Object} status status object from GameDig node js module
  */
 function parseServerStatus(status) {
   const pContainer = qs('#players');
@@ -801,7 +801,7 @@ function parseServerStatus(status) {
 /**
  * check if ip  address is valid
  *
- * @param {String} ip - ip address
+ * @param {String} ip ip address
  */
 function validIPaddress(ip) {
   return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ip);
@@ -810,7 +810,7 @@ function validIPaddress(ip) {
 /**
  * check if ip is LAN address
  *
- * @param {String} ip - ip address of the client connected to the server
+ * @param {String} ip ip address of the client connected to the server
  */
 function isLocalIP(ip) {
   return /(^127\.)|(^192\.168\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^::1$)|(^[fF][cCdD])/.test(ip);
@@ -819,7 +819,7 @@ function isLocalIP(ip) {
 /**
  * lookup and caches ip address to get the origin country
  *
- * @param {String} ip - ip address of the client connected to the server
+ * @param {String} ip ip address of the client connected to the server
  */
 function ipLookup(ip, id) {
   return new Promise((resolve, reject) => {
@@ -876,9 +876,9 @@ function fetchDemos() {
 /**
  * create a option element and append to the parent element
  *
- * @param {String} option - name the client will see in UI
- * @param {Number} value - the decimal identifier for the keystroke
- * @param {Element} parent - the element to append the finished option element
+ * @param {String} option name the client will see in UI
+ * @param {Number} value the decimal identifier for the keystroke
+ * @param {Element} parent the element to append the finished option element
  */
 function makeOption(option, value, parent) {
   var el = document.createElement('option');
@@ -890,8 +890,8 @@ function makeOption(option, value, parent) {
 /**
  * get list of months from server and creates a option element
  *
- * @param {Number} month - # month
- * @param {Function} cb - callback function
+ * @param {Number} month # month
+ * @param {Function} cb callback function
  */
 function fetchOldMonths(month, cb) {
   if (!month) {
@@ -972,7 +972,7 @@ function registerServiceWorker() {
 /**
  * greturns the stats of the weapon the player has the most kills
  *
- * @param {Array} weapons - array of weapons player has kills with
+ * @param {Array} weapons array of weapons player has kills with
  */
 function favWeapon(weapons) {
   let highest = 0;
@@ -1203,10 +1203,6 @@ qs('#discord').onClick(_ => {
 qs('#github').onClick(_ => {
   window.location.href = 'https://github.com/dough10/hl2dm-stats';
 });
-
-// qs('#paypal').onClick(_ => {
-//   window.location.href = 'https://www.paypal.me/jdough10';
-// });
 
 qs('#home').onClick(homePage);
 
