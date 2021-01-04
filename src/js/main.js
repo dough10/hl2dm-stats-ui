@@ -543,8 +543,6 @@ function parseTopData(top, page, cb) {
       name.textContent = `${player.name} (${player.geo.country})`;
       name.title = `${player.name} (${player.geo.country})`;
     }
-    name.textContent = player.name;
-    name.title = player.name;
     name.style.transition = `color 200ms ease-in 0ms`;
     name.style.height = '24px';
     const weaponWrapper1 = createWrapper();
