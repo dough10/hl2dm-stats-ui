@@ -536,7 +536,10 @@ function parseTopData(top, page, cb) {
     const card = createCard();
     card.classList.add('stat');
     const name = document.createElement('div');
-    if (!player.geo) {
+    if (!player.geo && !isLocalIP(player.ip)) {
+      name.textContent = `${player.name} (??)`;
+      name.title = `${player.name} (??)`;
+    } else if (!player.geo && isLocalIP(player.ip)) {
       name.textContent = `${player.name} (US)`;
       name.title = `${player.name} (US)`;
     } else {
@@ -553,10 +556,6 @@ function parseTopData(top, page, cb) {
     weaponWrapper2.style.marginTop = '24px';
     weaponWrapper2.style.display = 'none';
     weaponWrapper2.style.opacity = 0;
-    // ipLookup(player.ip, player.id).then(res => {
-    //   name.textContent = name.textContent + ` (${res.country})`;
-    //   name.title = name.title + ` (${res.country})`;
-    // });
     name.classList.add('player-name');
     const stats = document.createElement('div');
     stats.style.display = "inline-flex";
