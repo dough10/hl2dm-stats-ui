@@ -752,6 +752,8 @@ function displayPlayer(player) {
 
 /**
  * handles notifications for players leaving the server
+ * 
+ * @param {Array} players list of players on the server
  */
 function removeOfflinePlayers(players) {
   // copy players online
@@ -759,12 +761,12 @@ function removeOfflinePlayers(players) {
   for (var ndx = 0; ndx < playersOnline.length; ndx++) {
     for (var ndx2 = 0; ndx2 < players.length; ndx2++) {
       if (notOnline[ndx] === players[ndx2].name) {
-        // remove players if still online. notOnline should only contain player who are no longer online
+        // remove players if they are still online. notOnline should only contain player who are no longer online
         notOnline.splice(notOnline.indexOf(notOnline[ndx]), 1);
       }
     }
   }
-  // remove player from online array and notify UI
+  // remove any left over players from online array and notify UI
   notOnline.forEach(player => {
     new Toast(`${player} has left the server`, 3);
     playersOnline.splice(playersOnline.indexOf(player), 1);
@@ -780,7 +782,6 @@ function parseServerStatus(status) {
   const pContainer = qs('#players');
   pContainer.innerHTML = '';
   if (status !== "offline") {
-    document.title = status.name;
     qs('.hostname').textContent = status.name;
     qs('#numPlayers').textContent = status.maxplayers;
     qs('#map').textContent = status.map;
