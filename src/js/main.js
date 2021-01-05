@@ -20,6 +20,10 @@ HTMLElement.prototype.onClick = function(cb) {
  */
 function applyRipples() {
   return new Promise(resolve => {
+    if (!PaperRipple) {
+      reject();
+      return;
+    }
     ripples.attachButtonRipple(qs('#fab'));
     qsa('.button').forEach(ripples.attachButtonRipple);
     qsa('.icon-button').forEach(ripples.attachRoundButtonRipple);
@@ -35,7 +39,15 @@ function applyRipples() {
 function loadRipples() {
   return new Promise((resolve, reject) => {
     loadCSSFile("../css/paper-ripple.min.css").then(_ => {
-      loadJSFile('../js/paper-ripple.min.js').then(applyRipples).then(resolve).catch(reject);
+      loadJSFile('../js/paper-ripple.min.js').then(applyRipples).then(resolve).catch(_ => {
+        if (!PaperRipple) {
+          setTimeout(_ => {
+            applyRipples().then(resolve);
+          }, 50);
+          return;
+        }
+        applyRipples().then(resolve);
+      });
     }).catch(reject);
   });
 }
