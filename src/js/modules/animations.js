@@ -10,18 +10,26 @@ export {
 };
 
 /**
- * animate transform / opacity on a give element
+ * animate transform of transform and opacity on a HTML element
  *
- * @param {HTMLElement} el *required*
- * @param {String} transform *required*
- * @param {Number} time
- * @param {Number} opacity
- * @param {Number} delay
+ * @param {HTMLElement} el the HTML element to be animated *required*
+ * @param {String} transform transform value *required*
+ * @param {Number} time duration the animation will take to play through *optional*
+ * @param {Number} opacity opacity value *optional*
+ * @param {Number} delay time to wait before animating *optional*
+ * 
+ * @returns {Promise<Void>} nothing
+ * 
+ * @example <caption>Example usage of animateElement() function.</caption>
+ * animateElement(card, 'translateX(0)', 200, 1).then(_ => {
+ * // animation complete
+ * });
  */
 function animateElement(el, transform, time, opacity, delay) {
   return new Promise(resolve => {
     if (!el) {
-      return resolve();
+      resolve();
+      return; 
     }
     if (el.style.transform === transform) {
       resolve();
@@ -54,8 +62,15 @@ function animateElement(el, transform, time, opacity, delay) {
 /**
  * fade in opacity of a given element
  *
- * @param {HTMLElement} el
- * @param {Number} time
+ * @param {HTMLElement} el HTML element to fade
+ * @param {Number} time duration of the fade animation
+ * 
+ * @returns {Promise<Void>} nothing
+ * 
+ * @example <caption>Example usage of fadeIn() function.</caption>
+ * fadeIn(card, 200).then(_ => {
+ * // animation complete
+ * });
  */
 function fadeIn(el, time) {
   return new Promise(resolve => {
@@ -87,8 +102,15 @@ function fadeIn(el, time) {
 /**
  * fade out opacity of a given element
  *
- * @param {HTMLElement} el
- * @param {Number} time
+ * @param {HTMLElement} el HTML element to fade
+ * @param {Number} time duration of the fade animation
+ * 
+ * @returns {Promise<Void>} nothing
+ * 
+ * @example <caption>Example usage of fadeOut() function.</caption>
+ * fadeOut(card, 200).then(_ => {
+ * // animation complete
+ * });
  */
 function fadeOut(el, time) {
   return new Promise(resolve => {
@@ -118,7 +140,9 @@ function fadeOut(el, time) {
 
 /**
  * animate scroll to top of the page
- * by moving content down the page and when content reachest top position page snaps back into original position
+ * moves content down the page and when content reachest what would be the top position the page snaps back into original position
+ * 
+ * @returns {Promise<Void>} Nothing
  */
 function animateScroll() {
   return new Promise(resolve => {
@@ -135,9 +159,9 @@ function animateScroll() {
 /**
  * animate transform / opacity on a give element
  *
- * @param {HTMLElement} el *required*
- * @param {String} height *required*
- * @param {Number} time
+ * @param {HTMLElement} el HTML element *required*
+ * @param {String} height height value *required*
+ * @param {Number} time duration for the animation to complete
  */
 function animateHeight(el, height, time) {
   return new Promise(resolve => {
