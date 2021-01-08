@@ -31,7 +31,8 @@ const files = [
   '404.html',
   '500.html',
   'admin.html',
-  'css/admin.css'
+  'css/admin.css',
+  'js/admin.js'
 ];
 
 
