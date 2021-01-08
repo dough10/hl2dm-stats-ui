@@ -792,6 +792,9 @@ function removeOfflinePlayers(players) {
 function parseServerStatus(status) {
   const pContainer = qs('#players');
   pContainer.innerHTML = '';
+  if (isArray(status)) {
+    return;
+  }
   if (status !== "offline") {
     qs('.hostname').textContent = status.name;
     qs('#numPlayers').textContent = status.maxplayers;
