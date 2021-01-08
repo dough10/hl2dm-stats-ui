@@ -792,7 +792,7 @@ function removeOfflinePlayers(players) {
 function parseServerStatus(status) {
   const pContainer = qs('#players');
   pContainer.innerHTML = '';
-  if (isArray(status)) {
+  if (Array.isArray(status)) {
     return;
   }
   if (status !== "offline") {
