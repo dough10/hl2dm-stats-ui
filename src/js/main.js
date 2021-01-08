@@ -548,12 +548,11 @@ function parseTopData(top, page, cb) {
     const card = createCard();
     card.classList.add('stat');
     const name = document.createElement('div');
-    if (!player.geo && !isLocalIP(player.ip)) {
-      name.textContent = `${player.name} (??)`;
-      name.title = `${player.name} (??)`;
-    } else if (!player.geo && isLocalIP(player.ip)) {
-      name.textContent = `${player.name} (US)`;
-      name.title = `${player.name} (US)`;
+    if (!player.geo) {
+      ipLookup(player.ip, player.id).then(res => {
+        name.textContent = `${player.name} (${res.country})`;
+        name.title = `${player.name} (${res.country})`;
+      });
     } else {
       name.textContent = `${player.name} (${player.geo.country})`;
       name.title = `${player.name} (${player.geo.country})`;

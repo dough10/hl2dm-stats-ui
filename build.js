@@ -29,7 +29,9 @@ const files = [
   'fonts/hl2mp.ttf',
   'fonts/csd.ttf',
   '404.html',
-  '500.html'
+  '500.html',
+  'admin.html',
+  'css/admin.css'
 ];
 
 
