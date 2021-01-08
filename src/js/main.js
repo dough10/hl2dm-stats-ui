@@ -790,11 +790,11 @@ function removeOfflinePlayers(players) {
  * @param {Object} status status object from GameDig node js module
  */
 function parseServerStatus(status) {
-  const pContainer = qs('#players');
-  pContainer.innerHTML = '';
   if (Array.isArray(status)) {
     return;
   }
+  const pContainer = qs('#players');
+  pContainer.innerHTML = '';
   if (status !== "offline") {
     qs('.hostname').textContent = status.name;
     qs('#numPlayers').textContent = status.maxplayers;
