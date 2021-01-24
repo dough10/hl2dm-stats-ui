@@ -15,7 +15,6 @@ const files = [
   'images/yeeeeeehawwwwwwmf.webp',
   'images/offline.webp',
   'images/maskable_icon.png',
-  'images/404.png',
   'css/paper-ripple.min.css',
   'js/paper-ripple.min.js',
   'js/analytics.js',
