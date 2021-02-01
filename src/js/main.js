@@ -476,7 +476,7 @@ function displayPlayerOnline(playersOnline) {
       console.log(distance);
       if (distance <= 0) {
         clearInterval(x);
-        animations.animateElement(el, 'translateY(-120)', 800, 0, 0);
+        animations.animateElement(el, 'translateY(-120%)', 800, 0, 0).then(_ => displayPlayerOnline(playersOnline));
       }
     };
     doTime();
