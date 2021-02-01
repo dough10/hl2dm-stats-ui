@@ -925,7 +925,7 @@ function fetchOldMonths(month, cb) {
         }
         var m = new Date(Number(months[months.length - 1])).getMonth();
         console.log(m);
-        fetchOldMonths(m);
+        //fetchOldMonths(m);
         qs('#months').selectedIndex = months.length - 1;
       });
     });
