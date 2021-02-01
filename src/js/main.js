@@ -909,7 +909,6 @@ function makeOption(option, value, parent) {
  * @param {Function} cb callback function
  */
 function fetchOldMonths(month, cb) {
-  console.log(month);
   if (typeof month === 'undefined') {
     qs('#months').innerHTML = '';
     fetch('/api/old-months').then(response => {
@@ -924,7 +923,6 @@ function fetchOldMonths(month, cb) {
           makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, months[i], qs('#months'));
         }
         var m = new Date(Number(months[months.length - 1])).getMonth();
-        console.log(m);
         fetchOldMonths(m);
         qs('#months').selectedIndex = months.length - 1;
       });
