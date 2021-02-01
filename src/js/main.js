@@ -460,10 +460,10 @@ function displayPlayerOnline(playersOnline) {
   resetTime.setHours(5);
   resetTime.setMinutes(0);
   resetTime.setSeconds(0);
-  resetTime.setMonth(resetTime.getMonth() + 1, 1);
+  resetTime.setMonth(resetTime.getMonth(), 1);
   console.log('lastday', loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1, 'before', loadtime.getDate() > lastDay.getDate() - 3, 'after', loadtime.getDate() <= 2);
-  console.log(`lastday = ${lastDay}; resetTime = ${resetTime}; loadTime = ${loadtime};`);
-  if (loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < lastDay.getTime() && loadtime.getDate() === 1) {
+  console.log(`lastday = ${lastDay}; resetTime = ${resetTime}; loadTime = ${loadTime};`);
+  if (loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1) {
     var doTime = _ => {
       var now = new Date().getTime();
       var distance = resetTime.getTime() - now;
