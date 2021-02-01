@@ -909,7 +909,8 @@ function makeOption(option, value, parent) {
  * @param {Function} cb callback function
  */
 function fetchOldMonths(month, cb) {
-  if (month !== undefined) {
+  console.log(month);
+  if (!month) {
     qs('#months').innerHTML = '';
     fetch('/api/old-months').then(response => {
       if (response.status !== 200) {
