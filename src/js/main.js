@@ -910,7 +910,7 @@ function makeOption(option, value, parent) {
  */
 function fetchOldMonths(month, cb) {
   console.log(month);
-  if (!month) {
+  if (typeof month !== 'undefined') {
     qs('#months').innerHTML = '';
     fetch('/api/old-months').then(response => {
       if (response.status !== 200) {
