@@ -461,8 +461,10 @@ function displayPlayerOnline(playersOnline) {
   resetTime.setMinutes(0);
   resetTime.setSeconds(0);
   resetTime.setMonth(resetTime.getMonth(), 1);
-  console.log('lastday', loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1, 'before', loadtime.getDate() > lastDay.getDate() - 3, 'after', loadtime.getDate() <= 2);
-  console.log(`lastday = ${lastDay}; resetTime = ${resetTime}; loadTime = ${loadtime};`);
+  console.log('lastDay', loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1, 'before', loadtime.getDate() > lastDay.getDate() - 3, 'after', loadtime.getDate() <= 2);
+  console.log(`lastDay = ${lastDay};`);
+  console.log(`resetTime = ${resetTime};`);
+  console.log(`loadtime = ${loadtime};`);
   if (loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1) {
     var doTime = _ => {
       var now = new Date().getTime();
