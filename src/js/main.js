@@ -471,7 +471,7 @@ function displayPlayerOnline(playersOnline) {
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       qs('#reset-text').textContent = `Stats will reset in ${hours} hours ${minutes} minutes ${seconds} seconds`;
-      if (distance < 0) {
+      if (distance <= 0) {
         clearInterval(x);
       }
     };
