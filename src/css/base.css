@@ -434,6 +434,7 @@ header {
   font-family: 'Roboto','Helvetica','Arial',sans-serif;
   position: relative;
   width: 150px;
+  font-size: initial;
 }
 .select-text {
   position: relative;
