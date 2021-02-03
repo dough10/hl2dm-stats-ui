@@ -437,8 +437,12 @@ function displayWeaponData(wrappers, weapons, kills) {
  */
 function showApp() {
   animations.fadeIn(qs('#stuff-below'));
+  var el = qs('#load');
+  var elHeight = el.offsetHeight;
+  elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-top'));
+  elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-bottom'));
   setTimeout(_ => {
-    animations.animateElement(qs('#load'), 'translateY(-102%)', 350);
+    animations.animateElement(el, `translateY(-${elHeight}) `, 350);
     if (!loaded) {
       displayPlayerOnline(numPlayersOnline);
     }

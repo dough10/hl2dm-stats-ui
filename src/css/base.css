@@ -469,8 +469,8 @@ header {
   pointer-events: none;
 }
 .select-label {
-  color: rgba(0,0,0, 0.26);
-  font-size: 18px;
+  /* color: rgba(0,0,0, 0.26);
+  font-size: 18px; */
   font-weight: normal;
   position: absolute;
   pointer-events: none;
