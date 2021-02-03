@@ -9,7 +9,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-display: fallback;
+  font-display: swap;
   src: url('../fonts/roboto-v15-latin-regular.eot'); /* IE9 Compat Modes */
   src: local('Roboto'), local('Roboto-Regular'),
      url('../fonts/roboto-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -21,17 +21,17 @@
 @font-face {
   font-family: "HL2";
   src: url("../fonts/halflife2.ttf");
-  font-display: auto;
+  font-display: swap;
 }
 @font-face {
   font-family: "HL2Weapons";
   src: url("../fonts/hl2mp.ttf");
-  font-display: auto;
+  font-display: swap;
 }
 @font-face {
   font-family: "CS";
   src: url("../fonts/csd.ttf");
-  font-display: auto;
+  font-display: swap;
 }
 .HL2 {
   font-family: "HL2"
