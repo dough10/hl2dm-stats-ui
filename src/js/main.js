@@ -442,7 +442,7 @@ function showApp() {
   elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-top'));
   elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-bottom'));
   setTimeout(_ => {
-    animations.animateElement(el, `translateY(-${elHeight}) `, 350);
+    animations.animateElement(el, `translateY(-${elHeight}px) `, 350);
     if (!loaded) {
       displayPlayerOnline(numPlayersOnline);
     }
