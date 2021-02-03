@@ -479,10 +479,10 @@ header {
   transition: 0.2s ease all;
 }
 .select-text:focus ~ .select-label, .select-text:valid ~ .select-label {
-  color: var(--main-color);
+  /* color: var(--main-color); */
   top: -20px;
   transition: 0.2s ease all;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 .select-bar {
   position: relative;
