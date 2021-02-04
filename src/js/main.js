@@ -433,16 +433,24 @@ function displayWeaponData(wrappers, weapons, kills) {
 }
 
 /**
+ * returns the height of the heml element
+ * @param {Element} el html element
+ */
+function elementHeight(el) {
+  var elHeight = el.offsetHeight;
+  elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-top'));
+  elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-bottom'));
+  return elHeight;
+}
+
+/**
  * removes loading screen overlay to show the main app body
  */
 function showApp() {
   animations.fadeIn(qs('#stuff-below'));
   var el = qs('#load');
-  var elHeight = el.offsetHeight;
-  elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-top'));
-  elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-bottom'));
   setTimeout(_ => {
-    animations.animateElement(el, `translateY(-${elHeight}px) `, 350);
+    animations.animateElement(el, `translateY(-${elementHeight(el)}px) `, 350);
     if (!loaded) {
       displayPlayerOnline(numPlayersOnline);
     }
@@ -486,6 +494,7 @@ function displayPlayerOnline(playersOnline) {
     var x = setInterval(doTime, 1000);
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (loadtime.getDate() > lastDay.getDate() - 3) {
+    resetTime.setMonth(loadtime.getMonth() + 1, 1);
     qs('#reset-text').textContent = `Stats will reset ${resetTime.toDateString()} at ${resetTime.toLocaleTimeString()}`;
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (loadtime.getDate() <= 2) {
