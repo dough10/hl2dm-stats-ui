@@ -495,6 +495,7 @@ function displayPlayerOnline(playersOnline) {
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (loadtime.getDate() > lastDay.getDate() - 3) {
     resetTime.setMonth(loadtime.getMonth() + 1, 1);
+    console.log(`resetTime = ${resetTime};`);
     qs('#reset-text').textContent = `Stats will reset ${resetTime.toDateString()} at ${resetTime.toLocaleTimeString()}`;
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (loadtime.getDate() <= 2) {
