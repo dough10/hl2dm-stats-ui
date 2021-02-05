@@ -473,11 +473,17 @@ function displayPlayerOnline(playersOnline) {
   resetTime.setMinutes(0);
   resetTime.setSeconds(0);
   resetTime.setMonth(resetTime.getMonth(), 1);
-  console.log('lastDay', loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1, 'before', loadtime.getDate() > lastDay.getDate() - 3, 'after', loadtime.getDate() <= 2);
-  console.log(`lastDay = ${lastDay};`);
-  console.log(`resetTime = ${resetTime};`);
-  console.log(`loadtime = ${loadtime};`);
-  if (loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1) {
+  // capture booleans
+  var daysAfterReset = loadtime.getDate() <= 2;
+  var daysBeforeReset = loadtime.getDate() > lastDay.getDate() - 3;
+  var dayOfReset = loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1;
+  // debug logging
+  console.log('dayOfReset', dayOfReset, 'daysBeforeReset', daysBeforeReset, 'daysAfterReset', daysAfterReset);
+  console.log(`lastDay = ${lastDay.toLocaleDateString()};`);
+  console.log(`resetTime = ${resetTime.toLocaleDateString()};`);
+  console.log(`loadtime = ${loadtime.toLocaleDateString()};`);
+  //
+  if (dayOfReset) {
     var doTime = _ => {
       var now = new Date().getTime();
       var distance = resetTime.getTime() - now;
@@ -493,17 +499,13 @@ function displayPlayerOnline(playersOnline) {
     doTime();
     var x = setInterval(doTime, 1000);
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
-  } else if (loadtime.getDate() > lastDay.getDate() - 3) {
+  } else if (daysBeforeReset) {
     resetTime.setMonth(loadtime.getMonth() + 1, 1);
     console.log(`resetTime = ${resetTime};`);
     qs('#reset-text').textContent = `Stats will reset ${resetTime.toDateString()} at ${resetTime.toLocaleTimeString()}`;
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
-  } else if (loadtime.getDate() <= 2) {
-    var lastReset = new Date(loadtime.getFullYear(), loadtime.getMonth(), 1);
-    lastReset.setHours(5);
-    lastReset.setMinutes(0);
-    lastReset.setSeconds(0);
-    qs('#reset-text').textContent = `Stats were reset ${lastReset.toDateString()} at ${lastReset.toLocaleTimeString()}`;
+  } else if (daysAfterReset) {
+    qs('#reset-text').textContent = `Stats were reset ${resetTime.toDateString()} at ${resetTime.toLocaleTimeString()}`;
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   }
   var say = '';
