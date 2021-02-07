@@ -3,11 +3,11 @@ HTMLElement.prototype.onClick = function(cb) {
 };
 
 function qs(selector, scope) {
-  return (scope || document).querySelector(selector)
+  return (scope || document).querySelector(selector);
 }
 
 function qsa(selector, scope) {
-  return (scope || document).querySelectorAll(selector)
+  return (scope || document).querySelectorAll(selector);
 }
 
 function attachButtonRipple(button) {
@@ -125,10 +125,8 @@ function parseServerStatus(status) {
       pContainer.appendChild(emptyServer());
     } else {
       for (let i = 0; i < numPlayersOnline; i++) {
-        var wrapper = displayPlayer(status.players[i])
-        wrapper.onClick(_ => {
-          fetch(`https://hl2dm.dough10.me/director/view/${status.players[i].name}`);
-        });
+        var wrapper = displayPlayer(status.players[i]);
+        wrapper.onClick(_ => fetch(`https://hl2dm.dough10.me/director/view/${status.players[i].name}`));
         attachButtonRipple(wrapper);
         wrapper.style.cursor = 'pointer';
         pContainer.appendChild(wrapper);
