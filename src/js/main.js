@@ -155,7 +155,11 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.color = 'yellow';
     suic.textContent = `Deaths by suicide: `;
     let suicCount = document.createElement('span');
-    suicCount.textContent = suicides[0][1];
+    if (suicides[0][1]) {
+      suicCount.textContent = suicides[0][1];
+    } else {
+      suicCount.textContent = suicides.count;
+    }
     header.appendChild(suic);
     header.appendChild(suicCount);
     con.appendChild(header);
@@ -573,6 +577,14 @@ function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
+/**
+ * card  clicked on to show player stats
+ * @param {HTMLElement} name players name element
+ * @param {HTMLElement} wrapper1 wrapper for top half of players weapon stats
+ * @param {HTMLElement} wrapper2 wrapper for bottom half of player weapon stats
+ * @param {HTMLElement} favWrapper wrapper for plyaers most used weapon
+ * @param {HTMLElement} card the clickable card element containing all player stats
+ */
 function cardClicked(name, wrapper1, wrapper2, favWrapper, card) {
   if (wrapper1.style.display !== 'none') {
     name.style.color = '#333333';
