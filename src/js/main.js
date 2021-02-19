@@ -144,7 +144,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     for (let i = 0; i < 3; i++) {
       let container = document.createElement('div');
       let title = document.createElement('span');
-      title.style.color = 'yellow';
+      // title.style.color = 'yellow';
       let stat = document.createElement('span');
       title.textContent = `${deathsBy[i][0]}: `;
       stat.textContent = ` ${deathsBy[i][1]}`;
@@ -155,7 +155,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
   }
   if (suicides) {
     let suic = document.createElement('div');
-    suic.style.color = 'yellow';
+    // suic.style.color = 'yellow';
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
     suic.style.fontSize = '15px';
