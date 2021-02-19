@@ -160,14 +160,12 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.fontSize = '14px';
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       let statContainer = document.createElement('div');
       let statTitleDiv = document.createElement('span');
       let statDiv = document.createElement('span');
-      if (suicides[i][0] !== 'count') {
-        statTitleDiv.textContent = `${suicides[i][0]}: `;
-        statDiv.textContent = `  ${suicides[i][1]}`;
-      }
+      statTitleDiv.textContent = `${suicides[i][0]}: `;
+      statDiv.textContent = `  ${suicides[i][1]}`;
       statContainer.appendChild(statTitleDiv);
       statContainer.appendChild(statDiv);
       con.appendChild(statContainer);
