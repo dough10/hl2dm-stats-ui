@@ -158,7 +158,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
     suic.style.fontSize = '14px';
-    suic.textContent = `Deaths by suicide: ${suicides[i][1]}`;
+    suic.textContent = `Deaths by suicide: ${suicides[0][1]}`;
     con.appendChild(suic);
     for (let i = 1; i < 4; i++) {
       if (suicides[i]) {
