@@ -1,6 +1,6 @@
 {
   "name": "hl2dm-stats-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Frontend for hl2dm-stats nodejs project",
   "main": "build.js",
   "scripts": {

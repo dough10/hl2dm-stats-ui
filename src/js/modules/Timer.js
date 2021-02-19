@@ -19,8 +19,16 @@ class Timer {
     ];
   }
   endString() {
-    var arr = this.end();
-    return `${arr[0]} hours ${arr[1]} minutes ${arr[2]} seconds`;
+    var endTime = this.end();
+    let str = '';
+    if (endTime[0]) {
+      str += `${endTime[0]} hours `;
+    }
+    if (endTime[1]) {
+      str += `${endTime[1]} minutes `;
+    }
+    str += `${endTime[2]} seconds`;
+    return str;
   }
 }
 

@@ -3,7 +3,7 @@ import {qs, qsa} from './modules/helpers.js';
 import * as ripples from './modules/ripples.js';
 import {loadCSSFile, loadJSFile} from './modules/loadFiles.js';
 import {Toast} from './modules/toast.js';
-import {Timer} from './modules/Timer.js';
+// import {Timer} from './modules/Timer.js';
 
 
 let numPlayersOnline = 0;
@@ -784,7 +784,7 @@ function parseTopData(top, page, cb) {
  * @param {Array} demos list of demos from this month
  */
 function parseDemos(demos) {
-  let timer = new Timer('parse demos');
+  // let timer = new Timer('parse demos');
   demos.forEach((demo, idx, array) => {
     const a = document.createElement('a');
     a.href = `https://hl2dm.dough10.me/api/download/${demo[0]}`;
@@ -807,9 +807,9 @@ function parseDemos(demos) {
     a.appendChild(card);
     qs('#page3').appendChild(a);
     ripples.attachButtonRipple(card);
-    if (idx === array.length - 1) {
-      console.log(`time to process demos ${timer.endString()}`);
-    }
+    // if (idx === array.length - 1) {
+    //   console.log(`time to process demos ${timer.endString()}`);
+    // }
   });
   showApp();
 }
