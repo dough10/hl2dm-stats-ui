@@ -592,122 +592,7 @@ function cardClicked(name, wrapper1, wrapper2, favWrapper, card) {
   }
 }
 
-/**
- * displays top player list in UI
- *
- * @param {Array} top list containing all the player and server stats from API
- * @param {String} page name of the element the output will be pushed to
- * @param {Function} cb ip address of the client connected to the server
- */
-function parseTopData(top, page, cb) {
-  const killsIcon = "M7,5H23V9H22V10H16A1,1 0 0,0 15,11V12A2,2 0 0,1 13,14H9.62C9.24,14 8.89,14.22 8.72,14.56L6.27,19.45C6.1,19.79 5.76,20 5.38,20H2C2,20 -1,20 3,14C3,14 6,10 2,10V5H3L3.5,4H6.5L7,5M14,12V11A1,1 0 0,0 13,10H12C12,10 11,11 12,12A2,2 0 0,1 10,10A1,1 0 0,0 9,11V12A1,1 0 0,0 10,13H13A1,1 0 0,0 14,12Z";
-  const deathsIcon = "M12,2A9,9 0 0,0 3,11C3,14.03 4.53,16.82 7,18.47V22H9V19H11V22H13V19H15V22H17V18.46C19.47,16.81 21,14 21,11A9,9 0 0,0 12,2M8,11A2,2 0 0,1 10,13A2,2 0 0,1 8,15A2,2 0 0,1 6,13A2,2 0 0,1 8,11M16,11A2,2 0 0,1 18,13A2,2 0 0,1 16,15A2,2 0 0,1 14,13A2,2 0 0,1 16,11M12,14L13.5,17H10.5L12,14Z";
-  const kdrIcon = "M3 18.34C3 18.34 4 7.09 7 3L12 4L11 7.09H9V14.25H10C12 11.18 16.14 10.06 18.64 11.18C21.94 12.71 21.64 17.32 18.64 19.36C16.24 21 9 22.43 3 18.34Z";
-  for (let i = 0; i < top[0].length; i++) {
-    const player = top[0][i];
-    const wrapper = createWrapper();
-    const card = createCard();
-    card.classList.add('stat');
-    const name = document.createElement('div');
-    if (!player.geo) {
-      ipLookup(player.ip, player.id).then(res => {
-        name.textContent = `${player.name} (${res.country})`;
-        name.title = `${player.name} (${res.country})`;
-      });
-    } else {
-      name.textContent = `${player.name} (${player.geo.country})`;
-      name.title = `${player.name} (${player.geo.country})`;
-    }
-    name.style.transition = `color 200ms ease-in 0ms`;
-    name.style.height = '24px';
-    const weaponWrapper1 = createWrapper();
-    weaponWrapper1.style.marginTop = '24px';
-    weaponWrapper1.style.display = 'none';
-    weaponWrapper1.style.opacity = 0;
-    const weaponWrapper2 = createWrapper();
-    weaponWrapper2.style.marginTop = '24px';
-    weaponWrapper2.style.display = 'none';
-    weaponWrapper2.style.opacity = 0;
-    name.classList.add('player-name');
-    const stats = document.createElement('div');
-    stats.style.display = "inline-flex";
-    const kills = createSVG(killsIcon, player.kills, "Kills");
-    const deaths = createSVG(deathsIcon, player.deaths, "Deaths", player.suicide, player.deathsBy);
-    const kdr = createSVG(kdrIcon, player.kdr, "KDR");
-    wrapper.appendChild(name);
-    const fav = favWeapon(player.weapons);
-    const favWrapper = createWrapper();
-    favWrapper.classList.add('tooltip');
-    if (window.innerWidth <= 500) {
-      favWrapper.style.display = 'none';
-    }
-    const tooltip = document.createElement('div');
-    const icon = document.createElement('div');
-    const text = document.createElement('div');
-    tooltip.classList.add('tooltiptext');
-    tooltip.style.transformOrigin = 'center';
-    let shots = 0;
-    let hits = 0;
-    let hs = 0;
-    let stk = 0;
-    let dam = 0;
-    let adpk = 0;
-    let adph = 0;
-    let hss = 0;
-    let lss = 9999;
-    if (fav[2] && fav[2][0] && fav[2][1] && fav[2][2]) {
-      shots = fav[2][0];
-      hits = fav[2][1];
-      hs = fav[2][2];
-      stk = fav[2][3];
-      dam = fav[2][4];
-      adpk = fav[2][5];
-      adph = fav[2][6];
-      hss = fav[2][7];
-      lss = fav[2][8];
-    }
-    tooltip.appendChild(tooltipHTML(
-      fav[0],
-      fav[1],
-      Math.round((fav[1] / player.kills) * 100),
-      shots,
-      hits,
-      hs,
-      stk,
-      dam,
-      adpk,
-      adph,
-      hss,
-      lss
-    ));
-    text.style.marginRight = '8px';
-    icon.style.marginRight = '4px';
-    let wIcon = getWeaponIcon(fav[0]);
-    icon.classList.add(wIcon[1]);
-    icon.textContent = wIcon[0];
-    text.textContent = fav[1];
-    favWrapper.appendChild(tooltip);
-    favWrapper.appendChild(icon);
-    favWrapper.appendChild(text);
-    stats.appendChild(favWrapper);
-    stats.appendChild(kills);
-    stats.appendChild(deaths);
-    stats.appendChild(kdr);
-    wrapper.appendChild(stats);
-    card.appendChild(wrapper);
-    card.style.height = '25px';
-    card.onClick(_ => cardClicked(name, weaponWrapper1, weaponWrapper2, favWrapper, card));
-    displayWeaponData([
-      weaponWrapper1,
-      weaponWrapper2
-    ], player.weapons, player.kills);
-    card.appendChild(weaponWrapper1);
-    card.appendChild(weaponWrapper2);
-    qs(page).appendChild(card);
-    setTimeout(_ => {
-      ripples.attachButtonRipple(card);
-    }, 200);
-  }
+function displayServerWeaponData(top, page) {
   const allWeaponsCard = createNoCard();
   const head = document.createElement('div');
   const wrapper1 = createWrapper();
@@ -716,7 +601,7 @@ function parseTopData(top, page, cb) {
   let total = 0;
   for (let n = 0; n < top[1].length; n++) {
     if (top[1][n][0] !== 'headshots') {
-      total = total + top[1][n][1];
+      total += top[1][n][1];
     }
   }
   displayWeaponData([
@@ -734,6 +619,146 @@ function parseTopData(top, page, cb) {
   lud.textContent = ` Last updated: ${new Date(top[4]).toLocaleString()}`;
   allWeaponsCard.appendChild(lud);
   qs(page).appendChild(allWeaponsCard);
+}
+
+function displayPlayerStatData(top, page, i) {
+  // svg icons
+  const killsIcon = "M7,5H23V9H22V10H16A1,1 0 0,0 15,11V12A2,2 0 0,1 13,14H9.62C9.24,14 8.89,14.22 8.72,14.56L6.27,19.45C6.1,19.79 5.76,20 5.38,20H2C2,20 -1,20 3,14C3,14 6,10 2,10V5H3L3.5,4H6.5L7,5M14,12V11A1,1 0 0,0 13,10H12C12,10 11,11 12,12A2,2 0 0,1 10,10A1,1 0 0,0 9,11V12A1,1 0 0,0 10,13H13A1,1 0 0,0 14,12Z";
+  const deathsIcon = "M12,2A9,9 0 0,0 3,11C3,14.03 4.53,16.82 7,18.47V22H9V19H11V22H13V19H15V22H17V18.46C19.47,16.81 21,14 21,11A9,9 0 0,0 12,2M8,11A2,2 0 0,1 10,13A2,2 0 0,1 8,15A2,2 0 0,1 6,13A2,2 0 0,1 8,11M16,11A2,2 0 0,1 18,13A2,2 0 0,1 16,15A2,2 0 0,1 14,13A2,2 0 0,1 16,11M12,14L13.5,17H10.5L12,14Z";
+  const kdrIcon = "M3 18.34C3 18.34 4 7.09 7 3L12 4L11 7.09H9V14.25H10C12 11.18 16.14 10.06 18.64 11.18C21.94 12.71 21.64 17.32 18.64 19.36C16.24 21 9 22.43 3 18.34Z";
+  // 
+  const player = top[0][i];
+  const wrapper = createWrapper();
+  const card = createCard();
+  card.classList.add('stat');
+  // player name
+  const name = document.createElement('div');
+  if (!player.geo) {
+    ipLookup(player.ip, player.id).then(res => {
+      name.textContent = `${player.name} (${res.country})`;
+      name.title = `${player.name} (${res.country})`;
+    });
+  } else {
+    name.textContent = `${player.name} (${player.geo.country})`;
+    name.title = `${player.name} (${player.geo.country})`;
+  }
+  name.style.transition = `color 200ms ease-in 0ms`;
+  name.style.height = '24px';
+  // top weapon row
+  const weaponWrapper1 = createWrapper();
+  weaponWrapper1.style.marginTop = '24px';
+  weaponWrapper1.style.display = 'none';
+  weaponWrapper1.style.opacity = 0;
+  // bottom weapon row
+  const weaponWrapper2 = createWrapper();
+  weaponWrapper2.style.marginTop = '24px';
+  weaponWrapper2.style.display = 'none';
+  weaponWrapper2.style.opacity = 0;
+  name.classList.add('player-name');
+  // kills deaths KDR
+  const stats = document.createElement('div');
+  stats.style.display = "inline-flex";
+  const kills = createSVG(killsIcon, player.kills, "Kills");
+  const deaths = createSVG(deathsIcon, player.deaths, "Deaths", player.suicide, player.deathsBy);
+  const kdr = createSVG(kdrIcon, player.kdr, "KDR");
+  wrapper.appendChild(name);
+  // most used weapon
+  const fav = favWeapon(player.weapons);
+  const favWrapper = createWrapper();
+  favWrapper.classList.add('tooltip');
+  if (window.innerWidth <= 500) {
+    favWrapper.style.display = 'none';
+  }
+  window.addEventListener('resize', _ => {
+    if (window.innerWidth <= 500) {
+      favWrapper.style.display = 'none';
+    } else {
+      favWrapper.style.display = 'block';
+    }
+  });
+  // 
+  const tooltip = document.createElement('div');
+  const icon = document.createElement('div');
+  const text = document.createElement('div');
+  tooltip.classList.add('tooltiptext');
+  tooltip.style.transformOrigin = 'center';
+  let shots = 0;
+  let hits = 0;
+  let hs = 0;
+  let stk = 0;
+  let dam = 0;
+  let adpk = 0;
+  let adph = 0;
+  let hss = 0;
+  let lss = 9999;
+  if (fav[2] && fav[2][0] && fav[2][1] && fav[2][2]) {
+    shots = fav[2][0];
+    hits = fav[2][1];
+    hs = fav[2][2];
+    stk = fav[2][3];
+    dam = fav[2][4];
+    adpk = fav[2][5];
+    adph = fav[2][6];
+    hss = fav[2][7];
+    lss = fav[2][8];
+  }
+  tooltip.appendChild(tooltipHTML(
+    fav[0],
+    fav[1],
+    Math.round((fav[1] / player.kills) * 100),
+    shots,
+    hits,
+    hs,
+    stk,
+    dam,
+    adpk,
+    adph,
+    hss,
+    lss
+  ));
+  text.style.marginRight = '8px';
+  icon.style.marginRight = '4px';
+  let wIcon = getWeaponIcon(fav[0]);
+  icon.classList.add(wIcon[1]);
+  icon.textContent = wIcon[0];
+  text.textContent = fav[1];
+  favWrapper.appendChild(tooltip);
+  favWrapper.appendChild(icon);
+  favWrapper.appendChild(text);
+  stats.appendChild(favWrapper);
+  stats.appendChild(kills);
+  stats.appendChild(deaths);
+  stats.appendChild(kdr);
+  wrapper.appendChild(stats);
+  card.appendChild(wrapper);
+  card.style.height = '25px';
+  card.onClick(_ => cardClicked(name, weaponWrapper1, weaponWrapper2, favWrapper, card));
+  displayWeaponData([
+    weaponWrapper1,
+    weaponWrapper2
+  ], player.weapons, player.kills);
+  card.appendChild(weaponWrapper1);
+  card.appendChild(weaponWrapper2);
+  qs(page).appendChild(card);
+  setTimeout(_ => {
+    ripples.attachButtonRipple(card);
+  }, 200);
+}
+
+/**
+ * displays top player list in UI
+ * 
+ *  there is too much going on in this function. needs to be trimmed down to be readable as it is a cluster fuck atm
+ *
+ * @param {Array} top list containing all the player and server stats from API
+ * @param {String} page name of the element the output will be pushed to
+ * @param {Function} cb ip address of the client connected to the server
+ */
+function parseTopData(top, page, cb) {
+  for (let i = 0; i < top[0].length; i++) {
+    displayPlayerStatData(top, page, i);
+  }
+  displayServerWeaponData(top, page);
   if (cb) cb();
   showApp();
 }
