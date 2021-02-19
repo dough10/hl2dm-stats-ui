@@ -573,8 +573,8 @@ function formatNumber(num) {
 function cardClicked(name, wrapper1, wrapper2, favWrapper, card) {
   if (wrapper1.style.display !== 'none') {
     name.style.color = '#333333';
-    animations.fadeOut(weaponWrapper2, 50);
-    animations.fadeOut(weaponWrapper1, 50).then(_ => {
+    animations.fadeOut(wrapper2, 50);
+    animations.fadeOut(wrapper1, 50).then(_ => {
       wrapper1.style.display = 'none';
       wrapper2.style.display = 'none';
       animations.fadeIn(favWrapper, 50);
