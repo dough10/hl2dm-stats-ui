@@ -97,11 +97,13 @@ function bundleMainJs() {
   });
 }
 
+
 function bundleTvJs() {
   return new Promise((resolve, reject) => {
     bundleImports('tv').then(uglifyJavaScript).then(resolve).catch(reject);
   });
 }
+
 
 function uglyCss(file) {
   return new Promise((resolve) => {
@@ -113,11 +115,13 @@ function uglyCss(file) {
   });
 }
 
+
 function uglyBaseCss() {
   return new Promise((resolve) => {
     uglyCss('base').then(resolve);
   });
 }
+
 
 function uglyTvCss() {
   return new Promise((resolve) => {
@@ -125,17 +129,20 @@ function uglyTvCss() {
   });
 }
 
+
 function minifyIndex() {
   return new Promise((resolve, reject) => {
     minifyHTML('index').then(resolve).catch(reject);
   });
 }
 
+
 function minifyTV() {
   return new Promise((resolve, reject) => {
     minifyHTML('hoedowntv').then(resolve).catch(reject);
   });
 }
+
 
 function makeFolders() {var imgFolder = './html/images';
   var cssFolder = './html/css';
@@ -155,6 +162,7 @@ function makeFolders() {var imgFolder = './html/images';
     fs.mkdirSync(jsFolder);
   }
 }
+
 
 makeFolders();
 bundleMainJs()

@@ -115,7 +115,7 @@ function createNoCard() {
  * @param {Number} count number of kills or deaths
  * @param {String} title thing needing icon
  */
-function createSVG(d, count, title, suicides) {
+function createSVG(d, count, title, suicides, deathsBy) {
   const wrapper = createWrapper();
   const tooltip = document.createElement('div');
   wrapper.style.margin = '0 0.2em';
@@ -133,8 +133,11 @@ function createSVG(d, count, title, suicides) {
   div.appendChild(titleEl);
   div.appendChild(countEl);
   con.appendChild(div);
+  for (let i = 0; i < 3; i++) {
+    console.log(deathsBy[weapon][0], deathsBy[weapon][1]);
+  }
   if (suicides) {
-    var suic = document.createElement('div');
+    var suic = document.createElement('span');
     suic.style.color = 'yellow';
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
@@ -204,7 +207,6 @@ function monthName(month) {
   switch (month) {
     case 0:
       return 'January';
-
     case 1:
       return 'Febuary';
     case 2:
@@ -470,15 +472,16 @@ function displayPlayerOnline(playersOnline) {
   resetTime.setMinutes(0);
   resetTime.setSeconds(0);
   resetTime.setMonth(resetTime.getMonth(), 1);
+  resetTime.setDate(1);
   // capture booleans
   var daysAfterReset = loadtime.getDate() <= 2;
   var daysBeforeReset = loadtime.getDate() > lastDay.getDate() - 3;
   var dayOfReset = loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1;
   // debug logging
   console.log('dayOfReset', dayOfReset, 'daysBeforeReset', daysBeforeReset, 'daysAfterReset', daysAfterReset);
-  console.log(`lastDay = ${lastDay.toLocaleDateString()};`);
-  console.log(`resetTime = ${resetTime.toLocaleDateString()};`);
-  console.log(`loadtime = ${loadtime.toLocaleDateString()};`);
+  console.log(`lastDay = ${lastDay.toLocaleString()};`);
+  console.log(`resetTime = ${resetTime.toLocaleString()};`);
+  console.log(`loadtime = ${loadtime.toLocaleString()};`);
   //
   if (dayOfReset) {
     var doTime = _ => {
@@ -588,7 +591,7 @@ function parseTopData(top, page, cb) {
     const stats = document.createElement('div');
     stats.style.display = "inline-flex";
     const kills = createSVG(killsIcon, player.kills, "Kills");
-    const deaths = createSVG(deathsIcon, player.deaths, "Deaths", player.suicide);
+    const deaths = createSVG(deathsIcon, player.deaths, "Deaths", player.suicide, player.deathsBy);
     const kdr = createSVG(kdrIcon, player.kdr, "KDR");
     wrapper.appendChild(name);
     const fav = favWeapon(player.weapons);
