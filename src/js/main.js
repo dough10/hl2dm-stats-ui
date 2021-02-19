@@ -153,17 +153,18 @@ function createSVG(d, count, title, suicides, deathsBy) {
     }
   }
   if (suicides) {
+    let header = document.createElement('div');
+    header.style.marginTop = '8px';
+    header.style.marginBottom = '8px';
+    header.style.fontSize = '12px';
     let suic = document.createElement('span');
     suic.style.color = 'yellow';
-    suic.style.marginTop = '8px';
-    suic.style.marginBottom = '8px';
-    suic.style.fontSize = '12px';
     suic.textContent = `Deaths by suicide: `;
     let suicCount = document.createElement('span');
     suicCount.textContent = suicides[0][1];
-    suicCount.style.fontSize = '12px';
-    con.appendChild(suic);
-    con.appendChild(suicCount);
+    header.appendChild(suic);
+    header.appendChild(suicCount);
+    con.appendChild(header);
     for (let i = 1; i < 4; i++) {
       if (suicides[i]) {
         let statContainer = document.createElement('div');
