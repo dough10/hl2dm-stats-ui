@@ -138,6 +138,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     let mostKilleBy = document.createElement('div');
     mostKilleBy.style.color = 'yellow';
     mostKilleBy.style.marginBottom = '8px';
+    mostKilleBy.style.fontSize = '15px';
     mostKilleBy.textContent = 'Most Killed By';
     con.appendChild(mostKilleBy);
     for (let i = 0; i < 3; i++) {
@@ -157,6 +158,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.color = 'yellow';
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
+    suic.style.fontSize = '15px';
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
     for (let stat in suicides) {
