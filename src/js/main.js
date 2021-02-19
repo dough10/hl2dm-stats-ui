@@ -138,13 +138,12 @@ function createSVG(d, count, title, suicides, deathsBy) {
     let mostKilleBy = document.createElement('div');
     mostKilleBy.style.color = 'yellow';
     mostKilleBy.style.marginBottom = '8px';
-    mostKilleBy.style.fontSize = '15px';
+    mostKilleBy.style.fontSize = '14px';
     mostKilleBy.textContent = 'Most Killed By';
     con.appendChild(mostKilleBy);
     for (let i = 0; i < 3; i++) {
       let container = document.createElement('div');
       let title = document.createElement('span');
-      // title.style.color = 'yellow';
       let stat = document.createElement('span');
       title.textContent = `${deathsBy[i][0]}: `;
       stat.textContent = ` ${deathsBy[i][1]}`;
@@ -158,18 +157,17 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.color = 'yellow';
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
-    suic.style.fontSize = '15px';
+    suic.style.fontSize = '14px';
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
-    for (let stat in suicides) {
+    for (let i = 0; i < 3; i++) {
       if (stat) {
         let statContainer = document.createElement('div');
         let statTitleDiv = document.createElement('span');
-        // statTitleDiv.style.color = 'yellow';
         let statDiv = document.createElement('span');
         if (stat !== 'count') {
-          statTitleDiv.textContent = `${stat}: `;
-          statDiv.textContent = `  ${suicides[stat]}`;
+          statTitleDiv.textContent = `${suicides[i][0]}: `;
+          statDiv.textContent = `  ${suicides[i][1]}`;
         }
         statContainer.appendChild(statTitleDiv);
         statContainer.appendChild(statDiv);
