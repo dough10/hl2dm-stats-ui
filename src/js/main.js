@@ -152,6 +152,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
       con.appendChild(container);
     }
   }
+  console.log(suicides);
   if (suicides) {
     let suic = document.createElement('div');
     suic.style.color = 'yellow';
