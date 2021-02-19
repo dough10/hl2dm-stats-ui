@@ -158,11 +158,10 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
     suic.style.fontSize = '14px';
-    suic.textContent = 'Deaths by suicide';
+    suic.textContent = `Deaths by suicide: ${suicides[i][1]}`;
     con.appendChild(suic);
-    for (let i = 0; i < 4; i++) {
+    for (let i = 1; i < 4; i++) {
       if (suicides[i]) {
-        if (suicides[i][0] === 'count') suicides[i][0] = 'Total';
         let statContainer = document.createElement('div');
         let statTitleDiv = document.createElement('span');
         let statDiv = document.createElement('span');
@@ -673,7 +672,7 @@ function displayPlayerStatData(top, page, i) {
     if (window.innerWidth <= 500) {
       favWrapper.style.display = 'none';
     } else {
-      favWrapper.style.display = 'block';
+      favWrapper.style.display = 'inline-flex';
     }
   });
   // 
