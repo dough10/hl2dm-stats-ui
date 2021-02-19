@@ -153,7 +153,6 @@ function createSVG(d, count, title, suicides, deathsBy) {
     }
   }
   if (suicides) {
-    console.log(suicides);
     let suic = document.createElement('div');
     suic.style.color = 'yellow';
     suic.style.marginTop = '8px';
@@ -162,6 +161,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
     for (let i = 0; i < 4; i++) {
+      console.log(suicides[i]);
       let statContainer = document.createElement('div');
       let statTitleDiv = document.createElement('span');
       let statDiv = document.createElement('span');
