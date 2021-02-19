@@ -60,16 +60,14 @@ function loadRipples() {
 function cascadeCards(container) {
   return new Promise(resolve => {
     const cards = qsa('.card', container);
-    let last;
-    for (let i = 0; i < cards.length; i++) {
+    for (var i = 0; i < cards.length; i++) {
       cards[i].style.display = 'block';
       animations.animateElement(cards[i], 'translateX(0)', 200, 1, i * 50);
-      last = i;
     }
     const nocard = qs('.nocard', container);
     if (!nocard) return;
     nocard.style.display = 'block';
-    animations.animateElement(nocard, 'translateX(0)', 200, 1, last * 50);
+    animations.animateElement(nocard, 'translateX(0)', 200, 1, i * 50);
     resolve();
   });
 }
@@ -137,7 +135,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
   div.appendChild(countEl);
   con.appendChild(div);
   if (deathsBy) {
-    let mostKilleBy = document.createElement('span');
+    let mostKilleBy = document.createElement('div');
     mostKilleBy.style.color = 'yellow';
     mostKilleBy.style.marginBottom = '8px';
     mostKilleBy.textContent = 'Most Killed By';
@@ -155,8 +153,9 @@ function createSVG(d, count, title, suicides, deathsBy) {
     }
   }
   if (suicides) {
-    let suic = document.createElement('span');
+    let suic = document.createElement('div');
     suic.style.color = 'yellow';
+    suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
