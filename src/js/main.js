@@ -467,7 +467,11 @@ function showApp() {
   animations.fadeIn(qs('#stuff-below'));
   let el = qs('#load');
   setTimeout(_ => {
-    animations.animateElement(el, `translateY(-${elementHeight(el)}px) `, 350);
+    animations.animateElement(el, `translateY(-${elementHeight(el)}px) `, 350).then(_ => {
+      window.addEventListener('resize', _ => {
+        el.style.transform = `translateY(-${elementHeight(el)}px)`;
+      });
+    });
     if (!loaded) {
       displayPlayerOnline(numPlayersOnline);
     }
