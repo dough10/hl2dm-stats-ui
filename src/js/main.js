@@ -157,7 +157,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.style.color = 'yellow';
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
-    suic.style.fontSize = '14px';
+    suic.style.fontSize = '12px';
     suic.textContent = `Deaths by suicide: `;
     let suicCount = document.createElement('span');
     suicCount.textContent = suicides[0][1];
