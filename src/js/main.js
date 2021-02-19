@@ -164,7 +164,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
       let statContainer = document.createElement('div');
       let statTitleDiv = document.createElement('span');
       let statDiv = document.createElement('span');
-      if (stat !== 'count') {
+      if (suicides[i][0] !== 'count') {
         statTitleDiv.textContent = `${suicides[i][0]}: `;
         statDiv.textContent = `  ${suicides[i][1]}`;
       }
