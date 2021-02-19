@@ -673,7 +673,7 @@ function displayPlayerStatData(top, page, i) {
     favWrapper.style.display = 'none';
   }
   window.addEventListener('resize', _ => {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 590) {
       favWrapper.style.display = 'none';
     } else {
       favWrapper.style.display = 'inline-flex';
