@@ -162,6 +162,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
     con.appendChild(suic);
     for (let i = 0; i < 4; i++) {
       if (suicides[i]) {
+        if (suicides[i][0] === 'count') suicides[i][0] = 'Total';
         let statContainer = document.createElement('div');
         let statTitleDiv = document.createElement('span');
         let statDiv = document.createElement('span');
