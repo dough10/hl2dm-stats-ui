@@ -134,7 +134,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
   div.appendChild(countEl);
   con.appendChild(div);
   for (let i = 0; i < 3; i++) {
-    console.log(deathsBy[weapon][0], deathsBy[weapon][1]);
+    console.log(deathsBy[i][0], deathsBy[i][1]);
   }
   if (suicides) {
     var suic = document.createElement('span');
