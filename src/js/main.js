@@ -155,7 +155,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
   }
   if (suicides) {
     let suic = document.createElement('div');
-    // suic.style.color = 'yellow';
+    suic.style.color = 'yellow';
     suic.style.marginTop = '8px';
     suic.style.marginBottom = '8px';
     suic.style.fontSize = '15px';
@@ -165,7 +165,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
       if (stat) {
         let statContainer = document.createElement('div');
         let statTitleDiv = document.createElement('span');
-        statTitleDiv.style.color = 'yellow';
+        // statTitleDiv.style.color = 'yellow';
         let statDiv = document.createElement('span');
         if (stat !== 'count') {
           statTitleDiv.textContent = `${stat}: `;
