@@ -6,9 +6,9 @@ import {Toast} from './modules/toast.js';
 import {Timer} from './modules/Timer.js';
 
 
-var numPlayersOnline = 0;
-var playersOnline = [];
-var loaded = false;
+let numPlayersOnline = 0;
+let playersOnline = [];
+let loaded = false;
 
 HTMLElement.prototype.onClick = function(cb) {
   this.addEventListener('click', cb, false);
@@ -60,7 +60,7 @@ function loadRipples() {
 function cascadeCards(container) {
   return new Promise(resolve => {
     const cards = qsa('.card', container);
-    for (var i = 0; i < cards.length; i++) {
+    for (let i = 0; i < cards.length; i++) {
       cards[i].style.display = 'block';
       animations.animateElement(cards[i], 'translateX(0)', 200, 1, i * 50);
     }
@@ -122,32 +122,32 @@ function createSVG(d, count, title, suicides, deathsBy) {
   wrapper.classList.add('tooltip');
   tooltip.classList.add('tooltiptext');
   tooltip.style.transformOrigin = 'center';
-  var con = document.createElement('div');
+  let con = document.createElement('div');
   con.classList.add('tt-container');
-  var div = document.createElement('div');
-  var titleEl = document.createElement('span');
+  let div = document.createElement('div');
+  let titleEl = document.createElement('span');
   titleEl.style.color = 'yellow';
   titleEl.textContent = `${title}: `;
-  var countEl = document.createElement('span');
+  let countEl = document.createElement('span');
   countEl.textContent = `  ${count}`;
   div.appendChild(titleEl);
   div.appendChild(countEl);
   con.appendChild(div);
   if (deathsBy) {
     for (let i = 0; i < 3; i++) {
-      console.log(deathsBy[i], deathsBy[i]);
+      console.log(deathsBy[i][0], deathsBy[i][1]);
     }
   }
   if (suicides) {
-    var suic = document.createElement('span');
+    let suic = document.createElement('span');
     suic.style.color = 'yellow';
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
-    for (var stat in suicides) {
-      var statContainer = document.createElement('div');
-      var statTitleDiv = document.createElement('span');
+    for (let stat in suicides) {
+      let statContainer = document.createElement('div');
+      let statTitleDiv = document.createElement('span');
       statTitleDiv.style.color = 'yellow';
-      var statDiv = document.createElement('span');
+      let statDiv = document.createElement('span');
       if (stat !== 'count') {
         statTitleDiv.textContent = `${stat}: `;
         statDiv.textContent = `  ${suicides[stat]}`;
@@ -297,7 +297,7 @@ function isLessThenOne(p) {
  * @param {String} color color to display the text
  */
 function textDiv(text, color) {
-  var div = document.createElement('div');
+  let div = document.createElement('div');
   if (color) {
     div.style.color = color;
   }
@@ -324,15 +324,15 @@ function numberWithCommas(x) {
  * @param {Number} hsPrecent precentage of shots fired that hit in the head
  */
 function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, shotsToKill, damage, adpk, adph, hss, lss) {
-  var container = document.createElement('div');
+  let container = document.createElement('div');
   container.classList.add('tt-container');
-  var weaponIcon = document.createElement('div');
+  let weaponIcon = document.createElement('div');
   weaponIcon.style.color = '#ff0';
-  var icon = getWeaponIcon(weaponName);
+  let icon = getWeaponIcon(weaponName);
   weaponIcon.classList.add(icon[1]);
   weaponIcon.textContent = icon[0];
   container.appendChild(weaponIcon);
-  var header = document.createElement('div');
+  let header = document.createElement('div');
   header.classList.add('tt-header');
   header.textContent = weaponName;
   container.appendChild(header);
@@ -375,16 +375,16 @@ function displayWeaponData(wrappers, weapons, kills) {
   }
   for (let i = 0; i < weapons.length; i++) {
     const weaponName = weapons[i][0];
-    var count = weapons[i][1];
-    var shots;
-    var hitPrecent;
-    var hsPrecent;
-    var shotsToKill;
-    var damage;
-    var adpk;
-    var adph;
-    var hss;
-    var lss;
+    let count = weapons[i][1];
+    let shots;
+    let hitPrecent;
+    let hsPrecent;
+    let shotsToKill;
+    let damage;
+    let adpk;
+    let adph;
+    let hss;
+    let lss;
     if (weapons[i][2]) {
       shots = weapons[i][2][0];
       hitPrecent = isLessThenOne(weapons[i][2][1]);
@@ -403,7 +403,7 @@ function displayWeaponData(wrappers, weapons, kills) {
     const text = document.createElement('div');
     const tooltip = document.createElement('div');
     text.classList.add('weapon-count');
-    var icon = getWeaponIcon(weaponName);
+    let icon = getWeaponIcon(weaponName);
     weaponIcon.classList.add(icon[1]);
     weaponIcon.textContent = icon[0];
     text.textContent = count;
@@ -438,7 +438,7 @@ function displayWeaponData(wrappers, weapons, kills) {
  * @param {Element} el html element
  */
 function elementHeight(el) {
-  var elHeight = el.offsetHeight;
+  let elHeight = el.offsetHeight;
   elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-top'));
   elHeight += parseInt(window.getComputedStyle(el).getPropertyValue('margin-bottom'));
   return elHeight;
@@ -449,7 +449,7 @@ function elementHeight(el) {
  */
 function showApp() {
   animations.fadeIn(qs('#stuff-below'));
-  var el = qs('#load');
+  let el = qs('#load');
   setTimeout(_ => {
     animations.animateElement(el, `translateY(-${elementHeight(el)}px) `, 350);
     if (!loaded) {
@@ -464,21 +464,21 @@ function showApp() {
  * @param {Number} playersOnline Number of players connected to the server
  */
 function displayPlayerOnline(playersOnline) {
-  var el = qs('#reset');
-  var loadtime = new Date();
+  let el = qs('#reset');
+  let loadtime = new Date();
   // lastDay = last day of the month
-  var lastDay = new Date(loadtime.getFullYear(), loadtime.getMonth() + 1, 0);
+  let lastDay = new Date(loadtime.getFullYear(), loadtime.getMonth() + 1, 0);
   // set resetTime  to 5am on 1st of the month
-  var resetTime = new Date();
+  let resetTime = new Date();
   resetTime.setHours(5);
   resetTime.setMinutes(0);
   resetTime.setSeconds(0);
   resetTime.setMonth(resetTime.getMonth(), 1);
   resetTime.setDate(1);
   // capture booleans
-  var daysAfterReset = loadtime.getDate() <= 2;
-  var daysBeforeReset = loadtime.getDate() > lastDay.getDate() - 3;
-  var dayOfReset = loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1;
+  let daysAfterReset = loadtime.getDate() <= 2;
+  let daysBeforeReset = loadtime.getDate() > lastDay.getDate() - 3;
+  let dayOfReset = loadtime.getDate() === lastDay.getDate() || loadtime.getTime() < resetTime.getTime() && loadtime.getDate() === 1;
   // debug logging
   console.log('dayOfReset', dayOfReset, 'daysBeforeReset', daysBeforeReset, 'daysAfterReset', daysAfterReset);
   console.log(`lastDay = ${lastDay.toLocaleString()};`);
@@ -486,12 +486,12 @@ function displayPlayerOnline(playersOnline) {
   console.log(`loadtime = ${loadtime.toLocaleString()};`);
   //
   if (dayOfReset) {
-    var doTime = _ => {
-      var now = new Date().getTime();
-      var distance = resetTime.getTime() - now;
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let doTime = _ => {
+      let now = new Date().getTime();
+      let distance = resetTime.getTime() - now;
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       qs('#reset-text').textContent = `Stats will reset in ${hours} hours ${minutes} minutes ${seconds} seconds`;
       if (distance <= 1000) {
         clearInterval(x);
@@ -499,7 +499,7 @@ function displayPlayerOnline(playersOnline) {
       }
     };
     doTime();
-    var x = setInterval(doTime, 1000);
+    let x = setInterval(doTime, 1000);
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (daysBeforeReset) {
     resetTime.setMonth(loadtime.getMonth() + 1, 1);
@@ -510,7 +510,7 @@ function displayPlayerOnline(playersOnline) {
     qs('#reset-text').textContent = `Stats were reset ${resetTime.toDateString()} at ${resetTime.toLocaleTimeString()}`;
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   }
-  var say = '';
+  let say = '';
   switch (playersOnline) {
     case 0:
       say = `${playersOnline} players online.`;
@@ -607,15 +607,15 @@ function parseTopData(top, page, cb) {
     const text = document.createElement('div');
     tooltip.classList.add('tooltiptext');
     tooltip.style.transformOrigin = 'center';
-    var shots = 0;
-    var hits = 0;
-    var hs = 0;
-    var stk = 0;
-    var dam = 0;
-    var adpk = 0;
-    var adph = 0;
-    var hss = 0;
-    var lss = 9999;
+    let shots = 0;
+    let hits = 0;
+    let hs = 0;
+    let stk = 0;
+    let dam = 0;
+    let adpk = 0;
+    let adph = 0;
+    let hss = 0;
+    let lss = 9999;
     if (fav[2] && fav[2][0] && fav[2][1] && fav[2][2]) {
       shots = fav[2][0];
       hits = fav[2][1];
@@ -643,7 +643,7 @@ function parseTopData(top, page, cb) {
     ));
     text.style.marginRight = '8px';
     icon.style.marginRight = '4px';
-    var wIcon = getWeaponIcon(fav[0]);
+    let wIcon = getWeaponIcon(fav[0]);
     icon.classList.add(wIcon[1]);
     icon.textContent = wIcon[0];
     text.textContent = fav[1];
@@ -694,8 +694,8 @@ function parseTopData(top, page, cb) {
   const wrapper1 = createWrapper();
   const wrapper2 = createWrapper();
   wrapper2.style.marginTop = '24px';
-  var total = 0;
-  for (var n = 0; n < top[1].length; n++) {
+  let total = 0;
+  for (let n = 0; n < top[1].length; n++) {
     if (top[1][n][0] !== 'headshots') {
       total = total + top[1][n][1];
     }
@@ -709,7 +709,7 @@ function parseTopData(top, page, cb) {
   allWeaponsCard.appendChild(head);
   allWeaponsCard.appendChild(wrapper1);
   allWeaponsCard.appendChild(wrapper2);
-  var lud = document.createElement('div');
+  let lud = document.createElement('div');
   lud.classList.add('server-stats');
   lud.style.marginTop = '16px';
   lud.textContent = ` Last updated: ${new Date(top[4]).toLocaleString()}`;
@@ -725,7 +725,7 @@ function parseTopData(top, page, cb) {
  * @param {Array} demos list of demos from this month
  */
 function parseDemos(demos) {
-  var timer = new Timer('parse demos');
+  let timer = new Timer('parse demos');
   demos.forEach((demo, idx, array) => {
     const a = document.createElement('a');
     a.href = `https://hl2dm.dough10.me/api/download/${demo[0]}`;
@@ -738,7 +738,7 @@ function parseDemos(demos) {
     const size = document.createElement('div');
     size.textContent = demo[1];
     const time = document.createElement('div');
-    var demoTime = new Date(demo[2]);
+    let demoTime = new Date(demo[2]);
     time.textContent = `${demoTime.toDateString()} at ${demoTime.toLocaleTimeString()}`;
     wrapper.appendChild(name);
     wrapper.appendChild(size);
@@ -762,7 +762,7 @@ function parseDemos(demos) {
  */
 function displayPlayer(player) {
   const wrapper = document.createElement('div');
-  var playerName = player.name;
+  let playerName = player.name;
   if (!playerName) {
     return wrapper;
   }
@@ -790,9 +790,9 @@ function displayPlayer(player) {
  */
 function removeOfflinePlayers(players) {
   // copy players online
-  var notOnline = [...playersOnline];
-  for (var ndx = 0; ndx < playersOnline.length; ndx++) {
-    for (var ndx2 = 0; ndx2 < players.length; ndx2++) {
+  let notOnline = [...playersOnline];
+  for (let ndx = 0; ndx < playersOnline.length; ndx++) {
+    for (let ndx2 = 0; ndx2 < players.length; ndx2++) {
       if (notOnline[ndx] === players[ndx2].name) {
         // remove players if they are still online. notOnline should only contain player who are no longer online
         notOnline.splice(notOnline.indexOf(notOnline[ndx]), 1);
@@ -861,7 +861,7 @@ function isLocalIP(ip) {
 function ipLookup(ip, id) {
   return new Promise((resolve, reject) => {
     if ('localStorage' in window && localStorage[id]) {
-      var savedData = JSON.parse(localStorage[id]);
+      let savedData = JSON.parse(localStorage[id]);
       if (ip !== savedData.ip) {
         if (!validIPaddress(ip)) {
           console.error(`error updating IP. IP address invalid ${ip}`);
@@ -918,7 +918,7 @@ function fetchDemos() {
  * @param {Element} parent the element to append the finished option element
  */
 function makeOption(option, value, parent) {
-  var el = document.createElement('option');
+  let el = document.createElement('option');
   el.textContent = option;
   el.value = value;
   parent.appendChild(el);
@@ -939,12 +939,12 @@ function fetchOldMonths(month, cb) {
         return;
       }
       response.json().then(months => {
-        for (var i = 0; i < months.length; i++) {
+        for (let i = 0; i < months.length; i++) {
           months[i] = Number(months[i].replace('.json', ''));
-          var now = new Date(months[i]);
+          let now = new Date(months[i]);
           makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, months[i], qs('#months'));
         }
-        var m = new Date(Number(months[months.length - 1])).getMonth();
+        let m = new Date(Number(months[months.length - 1])).getMonth();
         fetchOldMonths(m);
         qs('#months').selectedIndex = months.length - 1;
       });
@@ -1040,7 +1040,7 @@ function connectWSS() {
     parseServerStatus(data);
   };
   socket.onclose = _ => {
-    var seconds = 2;
+    let seconds = 2;
     console.log(`${new Date().toLocaleString()} - Socket close. Reconnecting in ${seconds} seconds.`);
     setTimeout(_ => {
       connectWSS();
@@ -1059,18 +1059,18 @@ function homePage() {
   fetchTop();
   window.history.pushState({}, null, '/');
 
-  var home = qs('#home');
+  let home = qs('#home');
   home.style.display = 'none';
 
-  var demos = qs('#demos');
+  let demos = qs('#demos');
   demos.style.display = 'inline-flex';
 
-  var stats = qs('#oldStats');
+  let stats = qs('#oldStats');
   stats.style.display = 'inline-flex';
 
-  var page1 = qs('#page1');
-  var page2 = qs('#page2');
-  var page3 = qs('#page3');
+  let page1 = qs('#page1');
+  let page2 = qs('#page2');
+  let page3 = qs('#page3');
 
   if (page2.style.display !== 'none') {
     animations.fadeOut(page2).then(_ => {
@@ -1095,18 +1095,18 @@ function demosPage() {
   fetchDemos();
   window.history.pushState({}, null, '/demos');
 
-  var home = qs('#home');
+  let home = qs('#home');
   home.style.display = 'inline-flex';
 
-  var demos = qs('#demos');
+  let demos = qs('#demos');
   demos.style.display = 'none';
 
-  var stats = qs('#oldStats');
+  let stats = qs('#oldStats');
   stats.style.display = 'inline-flex';
 
-  var page1 = qs('#page1');
-  var page2 = qs('#page2');
-  var page3 = qs('#page3');
+  let page1 = qs('#page1');
+  let page2 = qs('#page2');
+  let page3 = qs('#page3');
 
   if (page1.style.display !== 'none') {
     animations.fadeOut(page1).then(_ => {
@@ -1131,18 +1131,18 @@ function oldStatsPage() {
   fetchOldMonths();
   window.history.pushState({}, null, '/old-stats');
 
-  var home = qs('#home');
+  let home = qs('#home');
   home.style.display = 'inline-flex';
 
-  var demos = qs('#demos');
+  let demos = qs('#demos');
   demos.style.display = 'inline-flex';
 
-  var stats = qs('#oldStats');
+  let stats = qs('#oldStats');
   stats.style.display = 'none';
 
-  var page1 = qs('#page1');
-  var page2 = qs('#page2');
-  var page3 = qs('#page3');
+  let page1 = qs('#page1');
+  let page2 = qs('#page2');
+  let page3 = qs('#page3');
 
   qs('#dl-buttons').style.opacity = 0;
   if (page1.style.display !== 'none') {
@@ -1162,7 +1162,7 @@ function oldStatsPage() {
 }
 
 function init() {
-  var page_load_time = new Date().getTime() - performance.timing.navigationStart;
+  let page_load_time = new Date().getTime() - performance.timing.navigationStart;
   console.log(`Page load: ${page_load_time}ms`);
   registerServiceWorker().then(reg => {
     if (!('PushManager' in window)) {
@@ -1182,7 +1182,7 @@ function init() {
     } else {
       fetchServerStatus();
     }
-    var page_ready_time = new Date().getTime() - performance.timing.navigationStart;
+    let page_ready_time = new Date().getTime() - performance.timing.navigationStart;
     console.log(`Page Ready: ${page_ready_time}ms`);
   });  
 }
@@ -1192,10 +1192,10 @@ function init() {
  */
 qs('.wrapper').onscroll = (e) => requestAnimationFrame(_ => {
   const infoHeight = qs('#info').offsetHeight / 2;
-  var wrapper;
-  var page1 = qs('#page1');
-  var page2 = qs('#page2');
-  var page3 = qs('#page3');
+  let wrapper;
+  let page1 = qs('#page1');
+  let page2 = qs('#page2');
+  let page3 = qs('#page3');
   if (page1.style.display === 'block') {
     wrapper = page1;
   } else if (page2.style.display === 'block') {
@@ -1268,13 +1268,13 @@ qs('#logZip').onClick(_ => {
 });
 
 qs('#months').addEventListener('change', e => {
-  var m = new Date(Number(e.target.value)).getMonth();
+  let m = new Date(Number(e.target.value)).getMonth();
   fetchOldMonths(m, _ => {
     // cascadeCards(qs('#page2'));
   });
 });
 
-var alert = qs('#reset');
+let alert = qs('#reset');
 alert.onClick(_ => {
   animations.animateElement(alert, 'translateY(-120%)', 800, 0, 0);
 });
