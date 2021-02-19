@@ -125,6 +125,7 @@ function createSVG(d, count, title, suicides, deathsBy) {
   let con = document.createElement('div');
   con.classList.add('tt-container');
   let div = document.createElement('div');
+  div.style.marginBottom = '4px';
   let titleEl = document.createElement('span');
   titleEl.style.color = 'yellow';
   titleEl.textContent = `${title}: `;
@@ -134,8 +135,19 @@ function createSVG(d, count, title, suicides, deathsBy) {
   div.appendChild(countEl);
   con.appendChild(div);
   if (deathsBy) {
+    let mostKilleBy = document.createElement('span');
+    mostKilleBy.style.color = 'yellow';
+    mostKilleBy.textContent = 'Most Killed By';
     for (let i = 0; i < 3; i++) {
-      console.log(deathsBy[i][0], deathsBy[i][1]);
+      let container = document.createElement('div');
+      let title = document.createElement('span');
+      title.style.color = 'yellow';
+      let stat = document.createElement('span');
+      title.textContent = `${deathsBy[i][0]}; `;
+      stat.textContent = ` ${deathsBy[i][1]}`;
+      container.appendChild(title);
+      container.appendChild(stat);
+      con.appendChild(container);
     }
   }
   if (suicides) {
@@ -144,17 +156,19 @@ function createSVG(d, count, title, suicides, deathsBy) {
     suic.textContent = 'Deaths by suicide';
     con.appendChild(suic);
     for (let stat in suicides) {
-      let statContainer = document.createElement('div');
-      let statTitleDiv = document.createElement('span');
-      statTitleDiv.style.color = 'yellow';
-      let statDiv = document.createElement('span');
-      if (stat !== 'count') {
-        statTitleDiv.textContent = `${stat}: `;
-        statDiv.textContent = `  ${suicides[stat]}`;
+      if (stat) {
+        let statContainer = document.createElement('div');
+        let statTitleDiv = document.createElement('span');
+        statTitleDiv.style.color = 'yellow';
+        let statDiv = document.createElement('span');
+        if (stat !== 'count') {
+          statTitleDiv.textContent = `${stat}: `;
+          statDiv.textContent = `  ${suicides[stat]}`;
+        }
+        statContainer.appendChild(statTitleDiv);
+        statContainer.appendChild(statDiv);
+        con.appendChild(statContainer);
       }
-      statContainer.appendChild(statTitleDiv);
-      statContainer.appendChild(statDiv);
-      con.appendChild(statContainer);
     }
   }
   tooltip.appendChild(con);
