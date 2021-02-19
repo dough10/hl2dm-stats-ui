@@ -570,6 +570,28 @@ function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
+function cardClicked(name, wrapper1, wrapper2, favWrapper, card) {
+  if (wrapper1.style.display !== 'none') {
+    name.style.color = '#333333';
+    animations.fadeOut(weaponWrapper2, 50);
+    animations.fadeOut(weaponWrapper1, 50).then(_ => {
+      wrapper1.style.display = 'none';
+      wrapper2.style.display = 'none';
+      animations.fadeIn(favWrapper, 50);
+      animations.animateHeight(card, '25px', 100);
+    });
+  } else {
+    name.style.color = '#b94949';
+    animations.fadeOut(favWrapper, 50);
+    animations.animateHeight(card, '154px', 100).then(_ => {
+      wrapper1.style.display = 'flex';
+      wrapper2.style.display = 'flex';
+      animations.fadeIn(wrapper1, 50);
+      animations.fadeIn(wrapper2, 50);
+    });
+  }
+}
+
 /**
  * displays top player list in UI
  *
@@ -674,27 +696,7 @@ function parseTopData(top, page, cb) {
     wrapper.appendChild(stats);
     card.appendChild(wrapper);
     card.style.height = '25px';
-    card.onClick(_ => {
-      if (weaponWrapper1.style.display !== 'none') {
-        name.style.color = '#333333';
-        animations.fadeOut(weaponWrapper2, 50);
-        animations.fadeOut(weaponWrapper1, 50).then(_ => {
-          weaponWrapper1.style.display = 'none';
-          weaponWrapper2.style.display = 'none';
-          animations.fadeIn(favWrapper, 50);
-          animations.animateHeight(card, '25px', 100);
-        });
-      } else {
-        name.style.color = '#b94949';
-        animations.fadeOut(favWrapper, 50);
-        animations.animateHeight(card, '154px', 100).then(_ => {
-          weaponWrapper1.style.display = 'flex';
-          weaponWrapper2.style.display = 'flex';
-          animations.fadeIn(weaponWrapper1, 50);
-          animations.fadeIn(weaponWrapper2, 50);
-        });
-      }
-    });
+    card.onClick(_ => cardClicked(name, weaponWrapper1, weaponWrapper2, favWrapper, card));
     displayWeaponData([
       weaponWrapper1,
       weaponWrapper2
