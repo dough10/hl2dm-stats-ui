@@ -492,6 +492,9 @@ function displayPlayerOnline(playersOnline) {
   let loadtime = new Date();
   // lastDay = last day of the month
   let lastDay = new Date(loadtime.getFullYear(), loadtime.getMonth() + 1, 0);
+  lastDay.setHours(5);
+  lastDay.setMinutes(0);
+  lastDay.setSeconds(0);
   // set resetTime  to 5am on 1st of the month
   let resetTime = new Date();
   resetTime.setHours(5);
@@ -513,12 +516,12 @@ function displayPlayerOnline(playersOnline) {
     let doTime = _ => {
       let x = setTimeout(doTime, 1000);
       let now = new Date().getTime();
-      let distance = resetTime.getTime() - now;
+      let distance = lastDay.getTime() - now;
       let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       qs('#reset-text').textContent = `Stats will reset in ${hours} hours ${minutes} minutes ${seconds} seconds`;
-      if (distance <= 999) {
+      if (distance <= 1000) {
         clearTimeout(x);
         // animations.animateElement(el, 'translateY(-120%)', 800, 0, 0).then(_ => displayPlayerOnline(playersOnline));
       }
