@@ -144,7 +144,8 @@ function minifyTV() {
 }
 
 
-function makeFolders() {var imgFolder = './html/images';
+function makeFolders() {
+  var imgFolder = './html/images';
   var cssFolder = './html/css';
   var fontFolder ='./html/fonts';
   var jsFolder = './html/js';

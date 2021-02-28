@@ -518,7 +518,7 @@ function displayPlayerOnline(playersOnline) {
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       qs('#reset-text').textContent = `Stats will reset in ${hours} hours ${minutes} minutes ${seconds} seconds`;
       if (distance <= 1000) {
-        clearInterval(x);
+        if (x) clearInterval(x);
         animations.animateElement(el, 'translateY(-120%)', 800, 0, 0).then(_ => displayPlayerOnline(playersOnline));
       }
     };
