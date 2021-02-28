@@ -510,21 +510,20 @@ function displayPlayerOnline(playersOnline) {
   console.log(`loadtime = ${loadtime.toLocaleString()};`);
   //
   if (dayOfReset) {
-    let x;
     let doTime = _ => {
+      let x = setTimeout(doTime, 1000);
       let now = new Date().getTime();
       let distance = resetTime.getTime() - now;
       let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       qs('#reset-text').textContent = `Stats will reset in ${hours} hours ${minutes} minutes ${seconds} seconds`;
-      if (distance <= 1000) {
-        if (x) clearInterval(x);
+      if (distance <= 999) {
+        if (x) clearTimeout(x);
         animations.animateElement(el, 'translateY(-120%)', 800, 0, 0).then(_ => displayPlayerOnline(playersOnline));
       }
     };
     doTime();
-    x = setInterval(doTime, 1000);
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (daysBeforeReset) {
     resetTime.setMonth(loadtime.getMonth() + 1, 1);
