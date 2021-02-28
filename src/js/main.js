@@ -514,6 +514,7 @@ function displayPlayerOnline(playersOnline) {
   console.log(`lastDay = ${lastDay.toLocaleString()};`);
   console.log(`resetTime = ${resetTime.toLocaleString()};`);
   console.log(`loadtime = ${loadtime.toLocaleString()};`);
+  console.log(`nextReset = ${nextReset.toLocaleString()};`);
   //
   if (dayOfReset) {
     let doTime = _ => {
