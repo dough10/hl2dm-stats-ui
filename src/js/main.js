@@ -510,6 +510,7 @@ function displayPlayerOnline(playersOnline) {
   console.log(`loadtime = ${loadtime.toLocaleString()};`);
   //
   if (dayOfReset) {
+    let x;
     let doTime = _ => {
       let now = new Date().getTime();
       let distance = resetTime.getTime() - now;
@@ -523,7 +524,7 @@ function displayPlayerOnline(playersOnline) {
       }
     };
     doTime();
-    let x = setInterval(doTime, 1000);
+    x = setInterval(doTime, 1000);
     animations.animateElement(el, 'translateY(0)', 800, 1, 0);
   } else if (daysBeforeReset) {
     resetTime.setMonth(loadtime.getMonth() + 1, 1);
