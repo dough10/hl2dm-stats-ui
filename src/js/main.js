@@ -492,9 +492,12 @@ function displayPlayerOnline(playersOnline) {
   let loadtime = new Date();
   // lastDay = last day of the month
   let lastDay = new Date(loadtime.getFullYear(), loadtime.getMonth() + 1, 0);
-  lastDay.setHours(5);
-  lastDay.setMinutes(0);
-  lastDay.setSeconds(0);
+  let nextReset = new Date();
+  nextReset.setHours(5);
+  nextReset.setMinutes(0);
+  nextReset.setSeconds(0);
+  nextReset.setMonth(resetTime.getMonth(), +1);
+  nextReset.setDate(1);
   // set resetTime  to 5am on 1st of the month
   let resetTime = new Date();
   resetTime.setHours(5);
