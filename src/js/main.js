@@ -496,7 +496,7 @@ function displayPlayerOnline(playersOnline) {
   nextReset.setHours(5);
   nextReset.setMinutes(0);
   nextReset.setSeconds(0);
-  nextReset.setMonth(resetTime.getMonth() + 1, 1);
+  nextReset.setMonth(nextReset.getMonth() + 1, 1);
   nextReset.setDate(1);
   // set resetTime  to 5am on 1st of the month
   let resetTime = new Date();
