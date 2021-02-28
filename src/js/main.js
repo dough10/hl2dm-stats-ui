@@ -511,7 +511,7 @@ function displayPlayerOnline(playersOnline) {
   //
   if (dayOfReset) {
     let doTime = _ => {
-      let x = setTimeout(doTime, 1000);
+      // let x = setTimeout(doTime, 1000);
       let now = new Date().getTime();
       let distance = resetTime.getTime() - now;
       let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -519,7 +519,7 @@ function displayPlayerOnline(playersOnline) {
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       qs('#reset-text').textContent = `Stats will reset in ${hours} hours ${minutes} minutes ${seconds} seconds`;
       if (distance <= 999) {
-        clearTimeout(x);
+        // clearTimeout(x);
         animations.animateElement(el, 'translateY(-120%)', 800, 0, 0).then(_ => displayPlayerOnline(playersOnline));
       }
     };
