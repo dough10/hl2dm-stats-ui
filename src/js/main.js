@@ -520,7 +520,12 @@ function displayPlayerOnline(playersOnline) {
     let doTime = _ => {
       let x = setTimeout(doTime, 1000);
       let now = new Date().getTime();
-      let distance = nextReset.getTime() - now;
+      let distance;
+      if (loadTime.getDate() === 1) {
+        distance = resetTime.getTime() - now;
+      } else {
+        distance = nextReset.getTime() - now;
+      }
       let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
