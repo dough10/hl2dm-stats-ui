@@ -521,7 +521,7 @@ function displayPlayerOnline(playersOnline) {
       let x = setTimeout(doTime, 1000);
       let now = new Date().getTime();
       let distance;
-      if (loadTime.getDate() === 1) {
+      if (loadtime.getDate() === 1) {
         distance = resetTime.getTime() - now;
       } else {
         distance = nextReset.getTime() - now;
