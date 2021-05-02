@@ -1001,7 +1001,7 @@ function makeOption(option, value, parent) {
  * @param {Number} month # month
  * @param {Function} cb callback function
  */
-function fetchOldMonths(month, year, cb) {
+function fetchOldMonths(month, year) {
   if (typeof month === 'undefined') {
     qs('#months').innerHTML = '';
     fetch('/api/old-months').then(response => {
@@ -1029,9 +1029,7 @@ function fetchOldMonths(month, year, cb) {
       return;
     }
     response.json().then(logs => {
-      parseTopData(logs, '#oldData', _ => {
-        setTimeout(cb, 1000);
-      });
+      parseTopData(logs, '#oldData', _ => {});
     });
   });
 }
@@ -1344,9 +1342,7 @@ qs('#months').addEventListener('change', e => {
   let date = Number(e.target.value);
   let m = new Date(date).getMonth();
   let y = new Date(date).getFullYear();
-  fetchOldMonths(m, y, _ => {
-    cascadeCards(qs('#page2'));
-  });
+  fetchOldMonths(m, y);
 });
 
 let alert = qs('#reset');
