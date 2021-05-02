@@ -1001,7 +1001,7 @@ function makeOption(option, value, parent) {
  * @param {Number} month # month
  * @param {Function} cb callback function
  */
-function fetchOldMonths(month, cb) {
+function fetchOldMonths(month, year, cb) {
   if (typeof month === 'undefined') {
     qs('#months').innerHTML = '';
     fetch('/api/old-months').then(response => {
@@ -1016,14 +1016,14 @@ function fetchOldMonths(month, cb) {
           makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, months[i], qs('#months'));
         }
         let m = new Date(Number(months[months.length - 1])).getMonth();
-        fetchOldMonths(m);
+        fetchOldMonths(m, new Date().getFullYear());
         qs('#months').selectedIndex = months.length - 1;
       });
     });
     return;
   }
   qs('#oldData').innerHTML = '';
-  fetch(`/api/old-stats/${month}`).then(response => {
+  fetch(`/api/old-stats/${month}/${year}`).then(response => {
     if (response.status !== 200) {
       console.error(response.status);
       return;
@@ -1339,8 +1339,10 @@ qs('#logZip').onClick(_ => {
 });
 
 qs('#months').addEventListener('change', e => {
-  let m = new Date(Number(e.target.value)).getMonth();
-  fetchOldMonths(m, _ => {
+  let date = Number(e.target.value);
+  let m = new Date(date).getMonth();
+  let y = new Date(date).getFullYear();
+  fetchOldMonths(m, y, _ => {
     // cascadeCards(qs('#page2'));
   });
 });
