@@ -3,3 +3,5 @@
 .jshintrc
 make-docs.js
 /removed/
+push.sh
+incriment-version.js
