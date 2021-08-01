@@ -1,4 +1,5 @@
 /node_modules/
 /html/
 .jshintrc
-datetest.js
+make-docs.js
+/removed/

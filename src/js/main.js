@@ -883,6 +883,7 @@ function removeOfflinePlayers(players) {
  * @param {Object} status status object from GameDig node js module
  */
 function parseServerStatus(status) {
+  if (!status) return;
   if (Array.isArray(status)) {
     return;
   }
