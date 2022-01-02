@@ -60,14 +60,16 @@ function loadRipples() {
 function cascadeCards(container) {
   return new Promise(resolve => {
     const cards = qsa('.card', container);
-    for (var i = 0; i < cards.length; i++) {
-      cards[i].style.display = 'block';
-      animations.animateElement(cards[i], 'translateX(0)', 200, 1, i * 50);
-    }
+    let index = 0;
+    cards.map(card, i => {
+      index = i;
+      card.style.display = 'block';
+      animations.animateElement(card, 'translateX(0)', 200, 1, i * 50);  
+    });
     const nocard = qs('.nocard', container);
     if (!nocard) return;
     nocard.style.display = 'block';
-    animations.animateElement(nocard, 'translateX(0)', 200, 1, i * 50);
+    animations.animateElement(nocard, 'translateX(0)', 200, 1, index * 50);
     resolve();
   });
 }
@@ -597,26 +599,24 @@ function formatNumber(num) {
  * @param {HTMLElement} favWrapper wrapper for plyaers most used weapon
  * @param {HTMLElement} card the clickable card element containing all player stats
  */
-function cardClicked(name, wrapper1, wrapper2, favWrapper, card) {
+async function cardClicked(name, wrapper1, wrapper2, favWrapper, card) {
   if (wrapper1.style.display !== 'none') {
     name.style.color = '#333333';
     animations.fadeOut(wrapper2, 50);
-    animations.fadeOut(wrapper1, 50).then(_ => {
-      wrapper1.style.display = 'none';
-      wrapper2.style.display = 'none';
-      animations.fadeIn(favWrapper, 50);
-      animations.animateHeight(card, '25px', 100);
-    });
-  } else {
-    name.style.color = '#b94949';
-    animations.fadeOut(favWrapper, 50);
-    animations.animateHeight(card, '154px', 100).then(_ => {
-      wrapper1.style.display = 'flex';
-      wrapper2.style.display = 'flex';
-      animations.fadeIn(wrapper1, 50);
-      animations.fadeIn(wrapper2, 50);
-    });
+    await animations.fadeOut(wrapper1, 50);
+    wrapper1.style.display = 'none';
+    wrapper2.style.display = 'none';
+    animations.fadeIn(favWrapper, 50);
+    animations.animateHeight(card, '25px', 100);
+    return;
   }
+  name.style.color = '#b94949';
+  animations.fadeOut(favWrapper, 50);
+  await animations.animateHeight(card, '154px', 100);
+  wrapper1.style.display = 'flex';
+  wrapper2.style.display = 'flex';
+  animations.fadeIn(wrapper1, 50);
+  animations.fadeIn(wrapper2, 50);
 }
 
 function displayServerWeaponData(top, page) {
@@ -796,8 +796,7 @@ function parseTopData(top, page, cb) {
  * @param {Array} demos list of demos from this month
  */
 function parseDemos(demos) {
-  // let timer = new Timer('parse demos');
-  demos.forEach((demo, idx, array) => {
+  demos.map(demo => {
     const a = document.createElement('a');
     a.href = `https://hl2dm.dough10.me/api/download/${demo[0]}`;
     a.download = true;
@@ -819,9 +818,6 @@ function parseDemos(demos) {
     a.appendChild(card);
     qs('#page3').appendChild(a);
     ripples.attachButtonRipple(card);
-    // if (idx === array.length - 1) {
-    //   console.log(`time to process demos ${timer.endString()}`);
-    // }
   });
   showApp();
 }
@@ -871,7 +867,7 @@ function removeOfflinePlayers(players) {
     }
   }
   // remove any left over players from online array and notify UI
-  notOnline.forEach(player => {
+  notOnline.map(player => {
     new Toast(`${player} has left the server`, 3);
     playersOnline.splice(playersOnline.indexOf(player), 1);
   });
@@ -893,13 +889,12 @@ function parseServerStatus(status) {
     qs('.hostname').textContent = status.name;
     qs('#numPlayers').textContent = status.maxplayers;
     qs('#map').textContent = status.map;
-    numPlayersOnline = status.players.length;
-    if (numPlayersOnline === 0) {
+    if (status.players.length === 0) {
       pContainer.appendChild(emptyServer());
     } else {
-      for (let i = 0; i < numPlayersOnline; i++) {
-        pContainer.appendChild(displayPlayer(status.players[i]));
-      }
+      status.players.map(player => {
+        pContainer.appendChild(displayPlayer(player));
+      });
     }
     removeOfflinePlayers(status.players);
   } else {
@@ -931,7 +926,7 @@ function isLocalIP(ip) {
  * @param {String} ip ip address of the client connected to the server
  */
 function ipLookup(ip, id) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if ('localStorage' in window && localStorage[id]) {
       let savedData = JSON.parse(localStorage[id]);
       if (ip !== savedData.ip) {
@@ -952,34 +947,31 @@ function ipLookup(ip, id) {
         name: "United States"
       });
       return;
+    }    
+    const response = await fetch(`https://get.geojs.io/v1/ip/country/${ip}.json`);
+    if (response.status !== 200) {
+      reject(response.status);
+      return;
     }
-    fetch(`https://get.geojs.io/v1/ip/country/${ip}.json`).then(response => {
-      if (response.status !== 200) {
-        reject(response.status);
-        return;
-      }
-      response.json().then(json => {
-        if ('localStorage' in window) {
-          localStorage[id] = JSON.stringify(json);
-        }
-        resolve(json);
-      });
-    });
+    const json = await response.json();
+    if ('localStorage' in window) {
+      localStorage[id] = JSON.stringify(json);
+    }
+    resolve(json);
   });
 }
 
 /**
  * grabs list of demos from server
  */
-function fetchDemos() {
+async function fetchDemos() {
   qs('#page3').innerHTML = '';
-  fetch('/api/demos').then(response => {
-    if (response.status !== 200) {
-      console.error(response.status);
-      return;
-    }
-    response.json().then(parseDemos);
-  });
+  const response = await fetch('/api/demos');
+  if (response.status !== 200) {
+    console.error(response.status);
+    return;
+  }
+  response.json().then(parseDemos);
 }
 
 /**
@@ -998,71 +990,69 @@ function makeOption(option, value, parent) {
 
 /**
  * get list of months from server and creates a option element
+ * @async
  *
  * @param {Number} month # month
  * @param {Function} cb callback function
  */
-function fetchOldMonths(month, year) {
+async function fetchOldMonths(month, year) {
   if (typeof month === 'undefined') {
     qs('#months').innerHTML = '';
-    fetch('/api/old-months').then(response => {
-      if (response.status !== 200) {
-        console.error(response.status);
-        return;
-      }
-      response.json().then(months => {
-        for (let i = 0; i < months.length; i++) {
-          months[i] = Number(months[i].replace('.json', ''));
-          let now = new Date(months[i]);
-          makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, months[i], qs('#months'));
-        }
-        let m = new Date(Number(months[months.length - 1])).getMonth();
-        fetchOldMonths(m, new Date().getFullYear());
-        qs('#months').selectedIndex = months.length - 1;
-      });
-    });
-    return;
-  }
-  qs('#oldData').innerHTML = '';
-  fetch(`/api/old-stats/${month}/${year}`).then(response => {
+    const response = await fetch('/api/old-months');
     if (response.status !== 200) {
       console.error(response.status);
       return;
     }
-    response.json().then(logs => {
-      parseTopData(logs, '#oldData', _ => {});
+    const months = await response.json();
+    months.map(month => {
+      month = Number(month.replace('.json', ''));
+      const now = new Date(month);
+      makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, month, qs('#months'));
     });
-  });
+    let monthNum = Number(months[months.length - 1].replace('.json', ''));
+    let m = new Date(monthNum).getMonth();
+    fetchOldMonths(m, new Date().getFullYear());
+    qs('#months').selectedIndex = months.length - 1;
+    // log for errors
+    console.log(months[months.length - 1], typeof months[months.length - 1], monthNum, m);
+    return;
+  }
+  qs('#oldData').innerHTML = '';
+  const response = await fetch(`/api/old-stats/${month}/${year}`);
+  if (response.status !== 200) {
+    console.error(response.status);
+    return;
+  }
+  const logs = await response.json();
+  parseTopData(logs, '#oldData', _ => {});
 }
 
 /**
  * grabs server stats from the server and send it to parse t he response
+ * @async
  */
-function fetchServerStatus() {
+async function fetchServerStatus() {
   setTimeout(fetchServerStatus, 5000);
-  fetch('/api/status').then(response => {
-    if (response.status !== 200) {
-      console.error(response.status);
-      return;
-    }
-    response.json().then(parseServerStatus);
-  });
+  const response = await fetch('/api/status');
+  if (response.status !== 200) {
+    console.error(response.status);
+    return;
+  }
+  response.json().then(parseServerStatus);
 }
 
 /**
  * grabs the player stats from the server
+ * @async
  */
-function fetchTop() {
+async function fetchTop() {
   qs('#page1').innerHTML = '';
-  fetch('/api/stats').then(response => {
-    if (response.status !== 200) {
-      console.error(response.status);
-      return;
-    }
-    response.json().then(top => {
-      parseTopData(top, '#page1');
-    });
-  });
+  const response = await fetch('/api/stats');
+  if (response.status !== 200) {
+    console.error(response.status);
+    return;
+  }
+  parseTopData(await response.json(), '#page1');
 }
 
 /**
@@ -1087,13 +1077,13 @@ function favWeapon(weapons) {
   let highest = 0;
   let weapon = "";
   let stats;
-  for (let i = 0; i < weapons.length; i++) {
-    if (weapons[i][1] > highest) {
-      highest = weapons[i][1];
-      weapon = weapons[i][0];
-      stats = weapons[i][2];
+  weapons.map(weapon => {
+    if (weapon[1] > highest) {
+      weapon = weapon[0];
+      highest = weapon[1];
+      stats = weapon[2];
     }
-  }
+  });
   return [
     weapon,
     highest,
