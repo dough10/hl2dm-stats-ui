@@ -996,6 +996,7 @@ function makeOption(option, value, parent) {
  * @param {Function} cb callback function
  */
 async function fetchOldMonths(month, year) {
+  console.log(month, year);
   if (typeof month === 'undefined') {
     qs('#months').innerHTML = '';
     const response = await fetch('/api/old-months');
@@ -1007,6 +1008,7 @@ async function fetchOldMonths(month, year) {
     months.map(month => {
       month = Number(month.replace('.json', ''));
       const now = new Date(month);
+      console.log(now);
       makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, month, qs('#months'));
     });
     let monthNum = Number(months[months.length - 1].replace('.json', ''));
