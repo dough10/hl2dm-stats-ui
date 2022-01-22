@@ -3,14 +3,12 @@ import {qs, qsa} from './modules/helpers.js';
 import * as ripples from './modules/ripples.js';
 import {loadCSSFile, loadJSFile} from './modules/loadFiles.js';
 import {Toast} from './modules/toast.js';
-// import {Timer} from './modules/Timer.js';
-
 
 let numPlayersOnline = 0;
 let playersOnline = [];
 let loaded = false;
 
-HTMLElement.prototype.onClick = function(cb) {
+HTMLElement.prototype.onClick = cb => {
   this.addEventListener('click', cb, false);
 };
 
