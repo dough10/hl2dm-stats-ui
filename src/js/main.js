@@ -743,7 +743,6 @@ function displayPlayerStatData(top, page, i) {
   ));
   text.style.marginRight = '8px';
   icon.style.marginRight = '4px';
-  console.log(fav);
   let wIcon = getWeaponIcon(fav[0]);
   icon.classList.add(wIcon[1]);
   icon.textContent = wIcon[0];
@@ -782,7 +781,6 @@ function displayPlayerStatData(top, page, i) {
  */
 function parseTopData(top, page, cb) {
   for (let i = 0; i < top[0].length; i++) {
-    console.log(top[i]);
     displayPlayerStatData(top, page, i);
   }
   displayServerWeaponData(top, page);
@@ -1015,8 +1013,6 @@ async function fetchOldMonths(month, year) {
     let m = new Date(monthNum).getMonth();
     fetchOldMonths(m, new Date().getFullYear());
     qs('#months').selectedIndex = months.length - 1;
-    // log for errors
-    console.log(months[months.length - 1], typeof months[months.length - 1], monthNum, m);
     return;
   }
   qs('#oldData').innerHTML = '';
@@ -1026,7 +1022,6 @@ async function fetchOldMonths(month, year) {
     return;
   }
   const logs = await response.json();
-  console.log(logs);
   parseTopData(logs, '#oldData', _ => {});
 }
 
