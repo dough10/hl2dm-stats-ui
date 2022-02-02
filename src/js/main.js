@@ -352,6 +352,7 @@ function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, s
   let weaponIcon = document.createElement('div');
   weaponIcon.style.color = '#ff0';
   let icon = getWeaponIcon(weaponName);
+  console.log(icon);
   weaponIcon.classList.add(icon[1]);
   weaponIcon.textContent = icon[0];
   container.appendChild(weaponIcon);
@@ -427,8 +428,6 @@ function displayWeaponData(wrappers, weapons, kills) {
     const tooltip = document.createElement('div');
     text.classList.add('weapon-count');
     let icon = getWeaponIcon(weaponName);
-    console.log(icon);
-    if (icon.length !== 2) console.log(icon);
     weaponIcon.classList.add(icon[1]);
     weaponIcon.textContent = icon[0];
     text.textContent = count;
