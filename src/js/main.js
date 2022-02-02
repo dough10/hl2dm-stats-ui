@@ -347,6 +347,7 @@ function numberWithCommas(x) {
  * @param {Number} hsPrecent precentage of shots fired that hit in the head
  */
 function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, shotsToKill, damage, adpk, adph, hss, lss) {
+  if ( weaponName === '') return;
   let container = document.createElement('div');
   container.classList.add('tt-container');
   let weaponIcon = document.createElement('div');
