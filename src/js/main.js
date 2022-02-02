@@ -348,7 +348,7 @@ function numberWithCommas(x) {
  */
 function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, shotsToKill, damage, adpk, adph, hss, lss) {
   let container = document.createElement('div');
-  if (weaponName === '') container;
+  if (weaponName === '') return container;
   container.classList.add('tt-container');
   let weaponIcon = document.createElement('div');
   weaponIcon.style.color = '#ff0';
