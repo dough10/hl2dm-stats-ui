@@ -352,7 +352,7 @@ function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, s
   let weaponIcon = document.createElement('div');
   weaponIcon.style.color = '#ff0';
   let icon = getWeaponIcon(weaponName);
-  console.log(icon);
+  console.log(icon, weaponName);
   weaponIcon.classList.add(icon[1]);
   weaponIcon.textContent = icon[0];
   container.appendChild(weaponIcon);
