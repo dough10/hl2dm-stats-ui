@@ -59,11 +59,13 @@ function cascadeCards(container) {
   return new Promise(resolve => {
     const cards = qsa('.card', container);
     let index = 0;
-    cards.map(card, i => {
-      index = i;
-      card.style.display = 'block';
-      animations.animateElement(card, 'translateX(0)', 200, 1, i * 50);  
-    });
+    if (cards.length) {
+      cards.map(card, i => {
+        index = i;
+        card.style.display = 'block';
+        animations.animateElement(card, 'translateX(0)', 200, 1, i * 50);  
+      });
+    }
     const nocard = qs('.nocard', container);
     if (!nocard) return;
     nocard.style.display = 'block';

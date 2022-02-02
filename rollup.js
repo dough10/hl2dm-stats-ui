@@ -6,7 +6,7 @@ export default {
   ],
   output: {
     dir: 'html/js',
-    format: 'esm'
+    format: 'cjs'
   },
   plugins: [babel({ babelHelpers: 'bundled' })]
 };

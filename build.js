@@ -23,7 +23,15 @@ const files = [
   'fonts/hl2mp.ttf',
   'fonts/csd.ttf',
   '404.html',
-  '500.html'
+  '500.html',
+  'js/main.js',
+  'js/modules/animations.js',
+  'js/modules/helpers.js',
+  'js/modules/loadFiles.js',
+  'js/modules/ripples.js',
+  'js/modules/Timer.js',
+  'js/modules/toast.js',
+  'js/modules/whichtransistion.js'
 ];
 
 
