@@ -264,6 +264,7 @@ function monthName(month) {
  * @param {String} weapon weapon needing icon
  */
 function getWeaponIcon(weapon) {
+  if (!weapon) console.log(weapon);
   switch (weapon) {
     case "grenade_frag":
       return ['4', 'HL2Weapons'];
@@ -426,6 +427,8 @@ function displayWeaponData(wrappers, weapons, kills) {
     const tooltip = document.createElement('div');
     text.classList.add('weapon-count');
     let icon = getWeaponIcon(weaponName);
+    console.log(icon);
+    if (icon.length !== 2) console.log(icon);
     weaponIcon.classList.add(icon[1]);
     weaponIcon.textContent = icon[0];
     text.textContent = count;
