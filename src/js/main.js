@@ -264,7 +264,7 @@ function monthName(month) {
  * @param {String} weapon weapon needing icon
  */
 function getWeaponIcon(weapon) {
-  if (!weapon) console.log(weapon);
+  if (!weapon) return;
   switch (weapon) {
     case "grenade_frag":
       return ['4', 'HL2Weapons'];
@@ -353,7 +353,6 @@ function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, s
   let weaponIcon = document.createElement('div');
   weaponIcon.style.color = '#ff0';
   let icon = getWeaponIcon(weaponName);
-  console.log(icon, weaponName);
   weaponIcon.classList.add(icon[1]);
   weaponIcon.textContent = icon[0];
   container.appendChild(weaponIcon);
@@ -786,7 +785,7 @@ function displayPlayerStatData(top, page, i) {
  */
 function parseTopData(top, page, cb) {
   for (let i = 0; i < top[0].length; i++) {
-    console.log(top[i]);
+    // console.log(top[i]);
     displayPlayerStatData(top, page, i);
   }
   displayServerWeaponData(top, page);
