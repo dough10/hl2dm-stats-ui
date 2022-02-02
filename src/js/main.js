@@ -1084,13 +1084,13 @@ function favWeapon(weapons) {
   let highest = 0;
   let weapon = "";
   let stats;
-  weapons.map(weapon => {
-    if (weapon[1] > highest) {
-      weapon = weapon[0];
-      highest = weapon[1];
-      stats = weapon[2];
+  for (let i = 0; i < weapons.length; i++) {
+    if (weapons[i][1] > highest) {
+      highest = weapons[i][1];
+      weapon = weapons[i][0];
+      stats = weapons[i][2];
     }
-  });
+  }
   return [
     weapon,
     highest,
