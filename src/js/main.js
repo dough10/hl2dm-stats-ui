@@ -747,6 +747,7 @@ function displayPlayerStatData(top, page, i) {
   ));
   text.style.marginRight = '8px';
   icon.style.marginRight = '4px';
+  console.log(fav);
   let wIcon = getWeaponIcon(fav[0]);
   icon.classList.add(wIcon[1]);
   icon.textContent = wIcon[0];
