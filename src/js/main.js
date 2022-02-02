@@ -786,6 +786,7 @@ function displayPlayerStatData(top, page, i) {
  */
 function parseTopData(top, page, cb) {
   for (let i = 0; i < top[0].length; i++) {
+    console.log(top[i]);
     displayPlayerStatData(top, page, i);
   }
   displayServerWeaponData(top, page);
