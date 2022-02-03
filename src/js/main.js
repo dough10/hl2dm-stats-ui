@@ -784,7 +784,7 @@ function parseTopData(top, page, cb) {
     displayPlayerStatData(top, page, i);
   }
   displayServerWeaponData(top, page);
-  if (cb) cb();
+  if (cb) setTimeout(cb, 500);
   showApp();
 }
 
@@ -969,7 +969,7 @@ async function fetchDemos() {
     console.error(response.status);
     return;
   }
-  response.json().then(parseDemos);
+  parseDemos(await response.json());
 }
 
 /**
@@ -994,7 +994,6 @@ function makeOption(option, value, parent) {
  * @param {Function} cb callback function
  */
 async function fetchOldMonths(month, year) {
-  // console.log(month, year);
   if (typeof month === 'undefined') {
     qs('#months').innerHTML = '';
     const response = await fetch('/api/old-months');
@@ -1006,7 +1005,6 @@ async function fetchOldMonths(month, year) {
     months.map(month => {
       month = Number(month.replace('.json', ''));
       const now = new Date(month);
-      // console.log(now);
       makeOption(`${monthName(now.getMonth())} ${now.getFullYear()}`, month, qs('#months'));
     });
     let monthNum = Number(months[months.length - 1].replace('.json', ''));
@@ -1022,7 +1020,7 @@ async function fetchOldMonths(month, year) {
     return;
   }
   const logs = await response.json();
-  parseTopData(logs, '#oldData', _ => {});
+  parseTopData(logs, '#oldData', cascadeCards);
 }
 
 /**
@@ -1036,7 +1034,7 @@ async function fetchServerStatus() {
     console.error(response.status);
     return;
   }
-  response.json().then(parseServerStatus);
+  parseServerStatus(await response.json());
 }
 
 /**
