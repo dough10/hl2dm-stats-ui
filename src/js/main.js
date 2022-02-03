@@ -784,7 +784,7 @@ function parseTopData(top, page, cb) {
     displayPlayerStatData(top, page, i);
   }
   displayServerWeaponData(top, page);
-  if (cb) setTimeout(cb, 500);
+  if (cb) cb();
   showApp();
 }
 
@@ -1020,7 +1020,7 @@ async function fetchOldMonths(month, year) {
     return;
   }
   const logs = await response.json();
-  parseTopData(logs, '#oldData', cascadeCards);
+  parseTopData(logs, '#oldData', _ => {});
 }
 
 /**
