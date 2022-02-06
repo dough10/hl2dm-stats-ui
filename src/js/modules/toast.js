@@ -1,7 +1,6 @@
 import * as ripples from './ripples.js';
 import {transitionEvent} from './whichtransistion.js';
 import {qs} from './helpers.js';
-export {Toast};
 
 /**
  * Overflow Toasts.
@@ -137,3 +136,5 @@ class Toast {
     this.toast.removeEventListener(transitionEvent, this._transitionEnd);
   }
 }
+
+export {Toast};

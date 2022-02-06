@@ -260,7 +260,6 @@ function monthName(month) {
  * @param {String} weapon weapon needing icon
  */
 function getWeaponIcon(weapon) {
-  if (!weapon) return;
   switch (weapon) {
     case "grenade_frag":
       return ['4', 'HL2Weapons'];
@@ -646,7 +645,7 @@ function displayServerWeaponData(top, page) {
   qs(page).appendChild(allWeaponsCard);
 }
 
-function displayPlayerStatData(top, page, i) {
+async function displayPlayerStatData(top, page, i) {
   // svg icons
   const killsIcon = "M7,5H23V9H22V10H16A1,1 0 0,0 15,11V12A2,2 0 0,1 13,14H9.62C9.24,14 8.89,14.22 8.72,14.56L6.27,19.45C6.1,19.79 5.76,20 5.38,20H2C2,20 -1,20 3,14C3,14 6,10 2,10V5H3L3.5,4H6.5L7,5M14,12V11A1,1 0 0,0 13,10H12C12,10 11,11 12,12A2,2 0 0,1 10,10A1,1 0 0,0 9,11V12A1,1 0 0,0 10,13H13A1,1 0 0,0 14,12Z";
   const deathsIcon = "M12,2A9,9 0 0,0 3,11C3,14.03 4.53,16.82 7,18.47V22H9V19H11V22H13V19H15V22H17V18.46C19.47,16.81 21,14 21,11A9,9 0 0,0 12,2M8,11A2,2 0 0,1 10,13A2,2 0 0,1 8,15A2,2 0 0,1 6,13A2,2 0 0,1 8,11M16,11A2,2 0 0,1 18,13A2,2 0 0,1 16,15A2,2 0 0,1 14,13A2,2 0 0,1 16,11M12,14L13.5,17H10.5L12,14Z";
@@ -659,10 +658,9 @@ function displayPlayerStatData(top, page, i) {
   // player name
   const name = document.createElement('div');
   if (!player.geo) {
-    ipLookup(player.ip, player.id).then(res => {
-      name.textContent = `${player.name} (${res.country})`;
-      name.title = `${player.name} (${res.country})`;
-    });
+    let res = await ipLookup(player.ip, player.id);
+    name.textContent = `${player.name} (${res.country})`;
+    name.title = `${player.name} (${res.country})`;
   } else {
     name.textContent = `${player.name} (${player.geo.country})`;
     name.title = `${player.name} (${player.geo.country})`;
