@@ -18,16 +18,16 @@ HTMLElement.prototype.onClick = function(cb) {
  */
 function applyRipples() {
   return new Promise((resolve, reject) => {
-    if (PaperRipple in window) {
+    // if (PaperRipple in window) {
       ripples.attachButtonRipple(qs('#fab'));
       qsa('.button').forEach(ripples.attachButtonRipple);
       qsa('.icon-button').forEach(ripples.attachRoundButtonRipple);
       qsa('.link').forEach(ripples.attachButtonRipple);
       ripples.attachButtonRipple(qs('#reset'));
       resolve();
-      return;
-    }
-    reject("PaperRipple not in window");
+    //   return;
+    // }
+    // reject("PaperRipple not in window");
   });
 }
 
