@@ -26,7 +26,7 @@ function loadJSFile(src) {
     script.async = true;
     script.defer = true;
     script.src = src;
-    script.onload = setTimeout(resolve, 50);
+    script.onload = setTimeout(resolve, 100);
     script.onerror = reject;
     qs('body').appendChild(script);
   });
