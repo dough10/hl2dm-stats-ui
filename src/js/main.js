@@ -38,13 +38,13 @@ function loadRipples() {
   return new Promise((resolve, reject) => {
     loadCSSFile("../css/paper-ripple.min.css").then(_ => {
       loadJSFile('../js/paper-ripple.min.js').then(applyRipples).then(resolve).catch(_ => {
-        if (!PaperRipple) {
-          setTimeout(_ => {
-            applyRipples().then(resolve);
-          }, 50);
+        if (PaperRipple in window) {
+          applyRipples().then(resolve);
           return;
         }
-        applyRipples().then(resolve);
+        setTimeout(_ => {
+          applyRipples().then(resolve);
+        }, 200);
       });
     }).catch(reject);
   });
