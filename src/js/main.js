@@ -35,14 +35,16 @@ function applyRipples() {
  * loads paper ripples effect to DOM
  */
 function loadRipples() {
-  return new Promise((resolve, reject) => {
-    loadCSSFile("../css/paper-ripple.min.css").then(_ => {
-      loadJSFile('../js/paper-ripple.min.js').then(applyRipples).then(resolve).catch(_ => {
-        setTimeout(_ => {
-          applyRipples().then(resolve);
-        }, 200);
-      });
-    }).catch(reject);
+  return new Promise(async resolve => {
+    try {
+      await loadCSSFile("../css/paper-ripple.min.css");
+      await loadJSFile('../js/paper-ripple.min.js');
+      await applyRipples();
+      resolve();
+    } catch (e) {
+      console.log(e);
+      loadRipples();
+    }
   });
 }
 
