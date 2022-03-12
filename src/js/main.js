@@ -27,7 +27,7 @@ function applyRipples() {
       resolve();
       return;
     }
-    reject();
+    reject("PaperRipple not in window");
   });
 }
 
