@@ -17,17 +17,17 @@ HTMLElement.prototype.onClick = function(cb) {
  * apply paper-ripples effect to UI elements
  */
 function applyRipples() {
-  return new Promise(resolve => {
-    if (!PaperRipple) {
-      reject();
+  return new Promise((resolve, reject) => {
+    if (PaperRipple in window) {
+      ripples.attachButtonRipple(qs('#fab'));
+      qsa('.button').forEach(ripples.attachButtonRipple);
+      qsa('.icon-button').forEach(ripples.attachRoundButtonRipple);
+      qsa('.link').forEach(ripples.attachButtonRipple);
+      ripples.attachButtonRipple(qs('#reset'));
+      resolve();
       return;
     }
-    ripples.attachButtonRipple(qs('#fab'));
-    qsa('.button').forEach(ripples.attachButtonRipple);
-    qsa('.icon-button').forEach(ripples.attachRoundButtonRipple);
-    qsa('.link').forEach(ripples.attachButtonRipple);
-    ripples.attachButtonRipple(qs('#reset'));
-    resolve();
+    reject();
   });
 }
 
@@ -38,10 +38,6 @@ function loadRipples() {
   return new Promise((resolve, reject) => {
     loadCSSFile("../css/paper-ripple.min.css").then(_ => {
       loadJSFile('../js/paper-ripple.min.js').then(applyRipples).then(resolve).catch(_ => {
-        if (PaperRipple in window) {
-          applyRipples().then(resolve);
-          return;
-        }
         setTimeout(_ => {
           applyRipples().then(resolve);
         }, 200);
