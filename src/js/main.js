@@ -38,7 +38,7 @@ function loadRipples() {
       await applyRipples();
       resolve();
     } catch (e) {
-      console.log(e);
+      console.error(e);
       loadRipples();
     }
   });
