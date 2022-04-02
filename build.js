@@ -44,6 +44,7 @@ function makeFolders() {
   var cssFolder = './html/css';
   var fontFolder ='./html/fonts';
   var jsFolder = './html/js';
+  var modulesFolder = './html/js/modules';
 
   if (!fs.existsSync(imgFolder)){
     fs.mkdirSync(imgFolder);
@@ -56,6 +57,9 @@ function makeFolders() {
   }
   if (!fs.existsSync(jsFolder)){
     fs.mkdirSync(jsFolder);
+  }
+  if (!fs.existsSync(modulesFolder)){
+    fs.mkdirSync(modulesFolder);
   }
 }
 
