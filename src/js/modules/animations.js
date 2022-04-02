@@ -28,6 +28,7 @@ export {
 function animateElement(el, transform, time, opacity, delay) {
   return new Promise(resolve => {
     if (!el) {
+      console.error(`${el} does not exist`);
       resolve();
       return; 
     }
@@ -39,7 +40,7 @@ function animateElement(el, transform, time, opacity, delay) {
       el.removeEventListener(transitionEvent, animationEnd);
       el.style.willChange = 'initial';
       el.style.transition = 'initial';
-      requestAnimationFrame(resolve);
+      resolve();
     };
     if (!time) {
       time = 300;
@@ -87,7 +88,7 @@ function fadeIn(el, time) {
       el.removeEventListener(transitionEvent, animationEnd);
       el.style.willChange = 'initial';
       el.style.transition = 'initial';
-      requestAnimationFrame(resolve);
+      resolve();
     };
     el.addEventListener(transitionEvent, animationEnd, true);
     el.style.willChange = 'opacity';
@@ -127,7 +128,7 @@ function fadeOut(el, time) {
       el.removeEventListener(transitionEvent, animationEnd);
       el.style.willChange = 'initial';
       el.style.transition = 'initial';
-      requestAnimationFrame(resolve);
+      resolve();
     };
     el.addEventListener(transitionEvent, animationEnd, true);
     el.style.willChange = 'opacity';
@@ -145,14 +146,13 @@ function fadeOut(el, time) {
  * @returns {Promise<Void>} Nothing
  */
 function animateScroll() {
-  return new Promise(resolve => {
+  return new Promise(async resolve => {
     const wrapper = document.querySelector('#container');
     const content = document.querySelector('#content');
-    animateElement(content, `translateY(${wrapper.scrollTop}px)`, 350).then(_ => {
-      content.style.transform = 'initial';
-      wrapper.scrollTop = 0;
-      resolve();
-    });
+    await animateElement(content, `translateY(${wrapper.scrollTop}px)`, 350);
+    content.style.transform = 'initial';
+    wrapper.scrollTop = 0;
+    resolve();
   });
 }
 
@@ -173,7 +173,7 @@ function animateHeight(el, height, time) {
       el.removeEventListener(transitionEvent, animationEnd);
       el.style.willChange = 'initial';
       el.style.transition = 'initial';
-      requestAnimationFrame(resolve);
+      resolve();
     };
     if (!time) {
       time = 300;
