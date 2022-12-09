@@ -327,6 +327,16 @@ function numberWithCommas(x) {
 }
 
 /**
+ *  Creates a text div and appends it to the passed HTML Element
+ * 
+ * @param {HTML Element} container 
+ * @param {String} string 
+ */
+function appendTextContainer(container, string) {
+  container.appendChild(textDiv(string));
+}
+
+/**
  * creates HTML for weapon info tooltips
  *
  * @param {String} weaponName name of the weapon
@@ -349,27 +359,27 @@ function tooltipHTML(weaponName, count, precent, shots, hitPrecent, hsPrecent, s
   header.classList.add('tt-header');
   header.textContent = weaponName;
   container.appendChild(header);
-  container.appendChild(textDiv(`${numberWithCommas(count)} kills`));
-  container.appendChild(textDiv(`${precent}% of total kills`));
+  appendTextContainer(container, `${numberWithCommas(count)} kills`);
+  appendTextContainer(container, `${precent}% of total kills`);
   if (damage) {
-    container.appendChild(textDiv(`${numberWithCommas(damage)} damage`));
+    appendTextContainer(container, `${numberWithCommas(damage)} damage`);
   }
   if (shots && hitPrecent && hsPrecent) {
-    container.appendChild(textDiv(`${numberWithCommas(shots)} fired shots`));
-    container.appendChild(textDiv(`${hitPrecent}% of shots hit`));
-    container.appendChild(textDiv(`${hsPrecent}% headshots`));
+    appendTextContainer(container, `${numberWithCommas(shots)} fired shots`);
+    appendTextContainer(container, `${hitPrecent}% of shots hit`);
+    appendTextContainer(container, `${hsPrecent}% headshots`);
     if (shotsToKill) {
-      container.appendChild(textDiv(`${numberWithCommas(shotsToKill)} avg shots pre kill`));
+      appendTextContainer(container, `${numberWithCommas(shotsToKill)} avg shots pre kill`);
     }
     if (adph) {
-      container.appendChild(textDiv(`Damage per hit`, 'yellow'));
-      container.appendChild(textDiv(`${numberWithCommas(adph)} average`));
+      appendTextContainer(container, `Damage per hit`, 'yellow');
+      appendTextContainer(container, `${numberWithCommas(adph)} average`);
     }
     if (hss) {
-      container.appendChild(textDiv(`${numberWithCommas(hss)} highest`));
+      appendTextContainer(container, `${numberWithCommas(hss)} highest`);
     }
     if (lss && lss !== 9999) {
-      container.appendChild(textDiv(`${numberWithCommas(lss)} lowest`));
+      appendTextContainer(container, `${numberWithCommas(lss)} lowest`);
     }
   }
   return container;
