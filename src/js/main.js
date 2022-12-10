@@ -323,7 +323,8 @@ function textDiv(text, color) {
  * @param {Number} x number to be seperated
  */
 function numberWithCommas(x) {
-  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  return x.toString();
+  // return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
 /**
