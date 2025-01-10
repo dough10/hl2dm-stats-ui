@@ -1,7 +1,7 @@
 /node_modules/
-/html/
 .jshintrc
 make-docs.js
 /removed/
 push.sh
 incriment-version.js
+.*
